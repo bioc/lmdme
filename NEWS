@@ -1,0 +1,18 @@
+lmdme 0.99.1
+----------------------------------------------------------------
+
+MINOR CHANGES
+
+* Getters now accept a character vector in `term` parameter, in order to specify one than one term if required. In addition, `design` and `model` were added, and `pvalues` like `Fvalues` were changed to match slot names.  (Thanks to Valerie Obenchain)
+
+* `lmdme` now works with NA presence in data matrix. This bug is related to lmFit intercept coefficient behavior, which breaks the data structure using drop (to numeric instead of keeping a matrix with one column) only if NA are present.
+
+* `lmdme` is now the only constructor. Method `initialize` was erased due to different reasons as described in https://stat.ethz.ch/pipermail/bioc­devel/2012­August/003554.html
+
+* `decomposition` example sections using `subset` parameter for simplicity (not all the data has to be decomposed in the example).
+
+* Enhance of `biplot` and `screeplot` functions with `term` and `mfcol` to simplify the graphic output specification.
+
+DOCUMENTATION
+
+* `NEWS` file was added.

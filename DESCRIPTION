@@ -1,0 +1,24 @@
+Package: lmdme
+Type: Package
+Title: Linear Model decomposition for Designed Multivariate Experiments
+Version: 0.99.2
+Date: 2012-09-03
+Author: Cristobal Fresno and Elmer A. Fernandez
+Maintainer: Cristobal Fresno <cristobalfresno@gmail.com>
+Description: linear ANOVA decomposition of Multivariate Designed Experiments
+    implementation based on limma lmFit. Features: i) Flexible formula type
+    interface, ii) Fast limma based implementation, iii) p and F values over
+    deflacted coefficients and iv) ploting functions for PCA and PLS
+License: GPL (>=2)
+biocViews: Microarray, OneChannel, TwoChannel, Bioinformatics,
+        Visualization, AssayDomains, DifferentialExpression,
+        ExperimentData, Cancer
+URL: http://200.45.112.41/bdmg/?page_id=38
+Imports: stats
+Depends: R (>= 2.14.1), methods, limma, pls
+Suggests: stemHypoxia
+Enhances: parallel
+Collate: 'lmDME-Class.R' 'lmDME-lmdme.R' 'lmDME-getters.R'
+        'lmDME-printshow.R' 'lmDME-padjust.R' 'lmDME-leverage.R'
+        'lmDME-permutation.R' 'lmDME-decomposition.R' 'lmDME-biplot.R'
+        'lmDME-screeplot.R' 'lmDME-loadingplot.R'

@@ -1,0 +1,178 @@
+\documentclass[a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{authblk}
+% \VignetteIndexEntry{lmdme: linear model framework for PCA/PLS analysis of ANOVA decomposition on Designed Multivariate Experiments in R }
+% \VignetteDepends{stemHypoxia, limma, pls}
+% \VignetteKeyword{ANOVA decomposition}
+% \VignetteKeyword{linear model}
+% \VignetteKeyword{PCA}
+% \VignetteKeyword{PLS}
+
+\title{Linear model for designed multivariate experiment (lmdme) - Vignette}
+\author[1,2]{Cristobal Fresno}
+\author[1,2]{Elmer A. Fern\'{a}ndez}
+\affil[1]{Bio-science Data Mining Group, Universidad Cat\'{o}lica de C\'{o}rdoba}
+\affil[2]{CONICET, Argentina}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\maketitle
+
+\section{Introduction}
+Current ``omics'' experiments (proteomics, transcriptomics, metabolomics or genomics) are multivariate by nature. Modern technology allows the exploration of the whole genome or a big subset of the proteome, where each gene/protein is in essence a variable explored to elucidate their relationship with some outcome. In addition, these experiments are including more experimental factors (time, dose, etc.) from design or subject specific information such as age, gender, linage and so on. Hence, in order to discover or evaluate experimental design or subject specific patterns, some multivariate approaches should be applied. In this context, Principal Component Analysis (PCA) and Partial Least Squares (PLS) are the most common. However, it is known that working with raw data could mask information of interest. So, ANOVA based decomposition is becoming popular to split variability sources, before the application of such multivariate approaches. Seminal works on genomics were ``de Haan'' et al. 2007 on APCA and Smilde et al. 2005 on ASCA models. However, as far as the authors know, R implementation of APCA is only available for spect data (ChemoSpec by Hanson 2012). Meanwhile, ASCA is only offered through a translation of the original Matlab\copyright $~$ code (Nueda et al. 2007). But, the later only accepts up to three design matrices, limiting and making its use difficult. Here we provide a flexible implementation of ``potentially'' any linear model specification for ANOVA decomposition. It also provides both PCA or PLS analysis capabilities, statistical significance, parallel permutation test and graphical representations. The implementation is well-suited to directly analyze gene expression matrices from microarray and RNA-seq experiments.
+
+\section{The model}
+A detailed explanation of ANOVA decomposition and multivariate analysis can be found in Zwanenburg et al. 2011. Briefly, let's assume that $G$ genes will be explored in a gene expression experiment (e.g. microarray or RNA-seq) with two main factors $A$ with $C$ levels $(A_{1}, \ldots, A_{C})$ and $B$ with $D$ levels $(B_{1}, \ldots, B_{D})$ for ``$j$'' replicates for each $A$, $B$ and $A \cdot B$ combination levels. This implies an $X^{GxN}$ matrix where $N=C \cdot D \cdot J$. Then, the ANOVA model for each gene can be written as (\ref{eq:anova}):
+\begin{equation}
+ x_{cdj}=\mu+\alpha_{c}+\beta_{d}+\alpha_{c}\cdot\beta_{d}+\varepsilon_{cdj}
+\label{eq:anova}  
+\end{equation}
+where $x_{cdj}$ is the measured expression for ``some'' gene, at combination ``$cd$'' of factors $A$ and $B$ for replicate ``$j$''; $\mu$ is the overall mean; $\alpha, \beta$ and $\alpha \cdot \beta$ are the main and interaction effects respectively; and the error term $\varepsilon \sim N(0,\sigma^{2})$. Equation (\ref{eq:anova}) can also be expressed in matrix form for all genes (\ref{eq:matrix}):
+\begin{equation}
+  X=\mu 1'+ X_{\alpha}+X_{\beta}+X_{\alpha \beta}+E
+\label{eq:matrix}  
+\end{equation}
+where $X_{s}$ matrices are of dimension $GxN$, $\mu$ and $1$ are vectors of dimension $Gx1$ and $Nx1$ respectively. Matrices $X_{\alpha}, X_{\beta},$ and $X_{\alpha \beta}$ contain the level averages for factors $A$, $B$ and interaction between the two factors respectively.
+
+\subsection{The decomposition algorithm}
+\label{sec:decomp}
+Equation (\ref{eq:matrix}) is decomposed iteratively, where for each step a term is calculated and subtracted from the preceding residuals, to feed the next model as depicted in equation (\ref{eq:step}), where ``$\wedge$'' denotes estimated coefficients. In de Haan et al. 2007, Smilde et al. 2005 and Nueda et al. 2007 this procedure is based on mean calculations given the measurement position through design matrices, which are error prone. These matrices contain ``$1$'' or ``$0$'' to identify which measured, belongs or not to which factor respectively. On the contrary, in this library, the means are estimated by a maximum likelihood method using \texttt{lmFit} function provided by ``\emph{limma}'' package (Smith 2003). Hence, statistical significance tests are automatically provided and, if required, empirical Bayes corrections can also be achieved.
+\begin{equation}
+  \begin{array}{ll}
+    step~0: & X=\mu 1'+ E_{\mu}\hookleftarrow \\
+    step~1: & \rightarrow \hat{E}_{\mu}=X-\hat{\mu}1'=X_{\alpha}+E_{\alpha \hookleftarrow} \\
+    step~2: & \rightarrow \hat{E}_{\alpha}=\hat{E}_{\mu}-\hat{X}_{\alpha}=X_{\beta}+E_{\beta \hookleftarrow} \\
+    step~3: & \rightarrow \hat{E}_{\beta}=\hat{E}_{\alpha}-\hat{X}_{\beta}=X_{\alpha \beta}+E_{\alpha \beta \hookleftarrow} \\
+    step~4: & \rightarrow \hat{E}_{\alpha \beta}=\hat{E}_{\beta}-\hat{X}_{\alpha \beta}=X_{\alpha \beta}+E_{\alpha \beta \hookleftarrow}\\
+            & E_{k}\sim N(0,\sigma^{2}),~~k=\mu,\alpha,\beta,\alpha \beta   
+  \end{array}
+\label{eq:step}  
+\end{equation}
+
+\subsection{PCA and PLSR analysis}
+Once the model is decomposed, PCA or PLSR can be carried out over each model term. In this context, PCA is concerned with explaining the variance structure of a set of observations (e.g. genes) through few linear combinations of variables (e.g. experimental conditions). It usually follows two main objectives: i) data reduction and ii) interpretation. When it is applied over residuals $\hat{E}_{k}$ with $k = \mu, \alpha, \beta, \alpha \beta$ it is known as APCA (de Haan et al. 2007), whereas when applied over coefficients $\hat{X}_{k}$ it is known as ASCA (Smilde et al. 2005). On the other hand, PLSR not only generalizes, but also combines features from regression and PCA, to deal with correlated explanatory variables in linear models (Abdi \& Williams 2003, Shawe-Taylor \& Cristianini 2005). It is particularly useful when one or several dependent variables (outputs - $O$) must be predicted from a large and potentially highly correlated set of independent variables (inputs $X$). In our case scenario, $X$ 
+could be the coefficient $\hat{X}_{k}$ matrix or the residual $\hat{E}_{k}$ and the $O$ matrix a diagonal or design information matrix when using the coefficients or residuals respectively; or even some particular user-defined matrix, such as a class matrix from Gene Ontology like in Gene Set Enrichment Analysis (GSEA) by Subramanian et al. 2005. In any case, the PLSR approach is useful to explore co-variability between gene expression and a predefined output class.
+
+\section{Other functionalities}
+\begin{itemize}
+  \item \textbf{Flexible input data}: just a $GxN$ matrix, which is the typical data for gene/protein expression experiments, and a data.frame with the experimental design.
+  \item \textbf{Statistics:} Student and F-test over coefficients are provided as well as leverage on PCA. They can be used to filter out rows/genes in PCA/PLSR analysis.
+  \item \textbf{Permutation test:} a parallel permutation test implementation is also provided.
+  \item \textbf{Visualization:} the package also offers different methods to visualize the results e.g. screeplots for PCA and biplots or loading plots for both PCA and PLSR.
+\end{itemize}
+
+\section{Example}
+Prado-Lopez et al. 2010 studied differentiation of human embryonic stem cells under hypoxia conditions (Gene Expression Omnibus accession GSE37761). They measured gene expression at different time points for controlled oxygen levels. In this context, factor $A$ stands for ``\emph{time}'' with $C=3$ levels $\{0.5, 1, 5days \}$ and factor $B$ for ``\emph{oxygen}'' with $D=3$ levels $\{1, 5, 21 \%\}$ and $J=2$ replicates, yielding a total of 18 samples. The rest of the dataset was excluded in order to account for balance design using the following commands:
+
+<<Loading libraries, echo=false,results=hide>>=
+library(lmdme)
+@
+
+<<Dataset loading, echo=true,results=hide>>=
+library(stemHypoxia)
+data(stemHypoxia) #This will load M and design objects in memory
+timeIndex   <- design$time %in% c("0.5","1","5")  #time levels
+oxygenIndex <- design$oxygen %in% c("1","5","21") #oxygen levels
+design<-design[ timeIndex & oxygenIndex,]# Both time & oxygen
+design$time  <-as.factor(design$time)  
+design$oxygen<-as.factor(design$oxygen)
+rownames(M)<-M[,1] #Gene ID as row.names of M
+M <- M[,colnames(M) %in% design$samplename] #Just what is needed
+@
+
+Now we can explore microarray gene expression data present on \texttt{M} matrix, with $N=$\Sexpr{nrow(M)} rows (genes) and \Sexpr{ncol(M)} columns (samples/microarrays). In addition,  the experimental \texttt{design} data.frame contains columns (main effects e.g. \emph{time} and \emph{oxygen}) and the sample names (\texttt{samplename}). Just to give an idea, the head of \texttt{design} and \texttt{M} (fot the first three microarrays) might look like these:
+
+<<Exploring M and design objects, echo=true>>=
+head(design)
+head(M)[,1:3]
+@
+
+Then, the ANOVA decomposition (see section \ref{sec:decomp}) of equation (\ref{eq:anova}) can be obtained by:
+
+<<Exploring M and design objects, echo=true>>=
+library(lmdme)
+fit <- lmdme(model=~time*oxygen,data=M,design=design)
+fit
+@ 
+
+where a brief description of the used \emph{data} and \emph{design} information is displayed and how the decomposition process was carried out: which \texttt{Formula} was applied in the corresponding \texttt{Step}, how many coefficients where calculated for each gene (\texttt{CoefCols}) and how the steps were named (\texttt{Names}).
+\newline
+So, now, let's choose those subjects/genes where at least one interaction coefficient is statistically different from zero (F-test over the coefficients) and perform ASCA over them.
+
+<<ASCA decomposition, echo=true>>=
+id<-F.p.values(fit,term="time:oxygen")[[1]]<0.001
+sum(id) #The amount of genes for further exploration
+decomposition(fit,decomposition="pca", type="coefficient", 
+              term="time:oxygen", subset=id, scale="row")
+biplot(fit,xlabs=rep("o",sum(id)), mfcol=NULL)
+@
+
+These instructions will perform ASCA and store the results inside the \texttt{fit} object. The user can also visualize the associated \texttt{biplot} (see Figure 1). 
+
+\begin{figure}[!hbp]
+ \begin{center}
+<<ASCA_biplot, fig=TRUE, results=hide, echo=false>>=
+biplot(fit,xlabs=rep("o",sum(id)), mfcol=NULL)
+@
+  \end{center}
+  \label{fig:ascabiplot}
+  \caption{Biplot of ANOVA Simultaneous Component Analysis over genes satisfying F-value<0.001 over the interaction coefficients (time*oxygen)}
+\end{figure}
+
+In addition, PLSR can be applied on the same term, against the identity matrix (default option) and obtain the corresponding biplot (see Fig. 2).
+
+<<PLS decomposition, echo=true>>=
+fit.plsr<-fit
+decomposition(fit.plsr,decomposition="plsr", type="coefficient", 
+              term="time:oxygen", subset=id,scale="row")
+biplot(fit.plsr, which = "loadings", xlabs=rep("o",sum(id)), 
+      ylabs=colnames(coefficients(fit.plsr,term="time:oxygen")[[1]]),
+       var.axes=TRUE, mfcol=NULL)
+@
+
+\begin{figure}[!hbp]
+ \begin{center}
+<<PLS_biplot, fig=TRUE, results=hide, echo=false>>=
+biplot(fit.plsr, which = "loadings", xlabs=rep("o",sum(id)), 
+      ylabs=colnames(coefficients(fit.plsr,term="time:oxygen")[[1]]),var.axes=TRUE, mfcol=NULL)
+@
+  \end{center}
+  \label{fig:plsbiplot}
+  \caption{Biplot of ANOVA Partial Least Squares over genes satisfying F-value < 0.001 over the interaction coefficients (time*oxygen).}
+\end{figure}
+
+\clearpage 
+
+The interaction effect can also be displayed by means of using loadingplot function (see Fig. 3). In the case of an ANOVA-PCA/PLS analysis, the user only needs to change the \texttt{type=}``\texttt{residuals}'' parameter in \texttt{decomposition} function call.
+
+\begin{figure}[!hbp]
+ \begin{center}
+<<Loadingplot, fig=TRUE, results=hide, echo=true>>=
+loadingplot(fit,term.x="time",term.y="oxygen")
+@
+\end{center}
+  \label{fig:loadignplot}
+  \caption{ANOVA Simultaneous Component Analysis loadingplot over genes satisfying F-value < 0.001 over the interaction coefficients (time*oxygen).}
+\end{figure}
+
+\begin{thebibliography}{99}
+\bibitem{Hertz} Hertz,J. Krogh,A. and Palmer,R.G ~ (1990) \emph{Introduction to the theory of neural computation}, Westview Press, Oxford, USA.  
+
+\bibitem{Abdi} Abdi H, Williams LJ ~ (2010) Principal component analysis. \emph{Wiley Interdisciplinary Reviews: Computational Statistics} \textbf{2}, 433-459
+\bibitem{DeHaan} De Haan JR, Wehrens R, Bauerschmidt S, Piek E, van Schaik RC, Buydens LMC ~ (2007) Interpretation of ANOVA models for microarray data using PCA. \emph{Bioinformatics} \textbf{23}, 184-190.
+\bibitem{Hanson} Hanson BA ~ (2012) ChemoSpec: Exploratory Chemometrics for Spectroscopy. \emph{package} \emph{version} 1.51-2, academic.depauw.edu/$\sim$hanson/ChemoSpec/ChemoSpec.html
+\bibitem{Nueda} Nueda MJ, Conesa A, Westerhuis JA, Hoefsloot HC, Smilde AK, Talon M, Ferrer A. ~(2007) Discovering gene expression patterns in time course microarray experiments by ANOVA-SCA. \emph{Bioinformatics} \textbf{23}, 1792-800.
+\bibitem{PradoLopez} Prado-Lopez S, Conesa A, Arminan A, Martinez-Losa M, Escobedo-Lucea C, Gandia C, Tarazona S, Melguizo D, Blesa D, Montaner D, Sanz-Gonzalez S, Sepulveda P, Gotz S, O'Connor JE, Moreno R, Dopazo J, Burks DJ, Stojkovic M ~ (2010) Hypoxia Promotes Efficient Differentiation of Human Embryonic Stem CellsFunctional Endothelium. \emph{Stem Cells} \textbf{28}, 407-418.
+\bibitem{ShaweTaylor} Shawe-Taylor J, Cristianini N ~ (2005) Kernel Methods for Pattern Analysis. \emph{Cambridge University Press}, ISBN 9780521813976
+\bibitem{Smilde} Smilde AK, Jansen JJ, Hoefsloot HCJ, Lamer RAN, Van der Greef J, Timmerman ME ~ (2005) ANOVA-simultaneous component analysis (ASCA): a new tool for analyzing designed metabolomics data. \emph{Bioinformatics} \textbf{21}, 3043-3048
+\bibitem{Smyth} Smyth GK (2004) Linear models and empirical bayes methods for assessing differential expression in microarray experiments. \emph{Stat. Appl. Genet. Mol. Biol.} (\textbf{Article 3}).
+\bibitem{Subramanian} Subramanian A, Tamayo P, Mootha VK, Mukherjee S, Ebert BL, Gillette MA, Paulovich A, Pomeroy SL, Golub TR, Lander ES, Mesirov JP ~ (2005) Gene set enrichment analysis: A knowledge-based approach for interpreting genome-wide expression profiles. \emph{PNAS} \textbf{102}, 15545-15550.
+\bibitem{Zwanenburg} Zwanenburg G, Hoefsloot HCJ, Westerhuis JA, Jansen JJ, Smilde AK ~ (2011) ANOVA-principal component analysis and ANOVA-simultaneous component analysis: a comparison. \emph{J. Chemometrics} \textbf{25}, 561-567
+\end{thebibliography}
+
+\section*{Session Info}
+<<Session Info, echo=true>>=
+sessionInfo()
+@
+
+\end{document}
