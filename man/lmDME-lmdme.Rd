@@ -1,18 +1,15 @@
+\docType{methods}
 \name{lmdme}
 \alias{lmdme}
 \alias{lmdme,formula,ANY,data.frame-method}
 \alias{lmdme-methods}
 \title{High level constructor of lmDME class object}
-\usage{
-  \S4method{lmdme}{formula,ANY,data.frame}(model, data,
-    design, Bayes = FALSE, verbose = FALSE, ...)
-}
 \arguments{
   \item{model}{formula object to carry out the
-  decomposition}
+  decomposition.}
 
   \item{data}{matrix or data.frame with individuals/genes
-  (rows) and samples/conditions (columns)}
+  (per rows) and samples/conditions (per columns).}
 
   \item{design}{data.frame with the design of the
   experiment, (rows) samples/conditions as in data columns
@@ -26,7 +23,8 @@
   \item{verbose}{Should the process progress be printed?
   Default value is FALSE.}
 
-  \item{...}{Additional parameters for lmFit function}
+  \item{...}{Additional parameters for \code{\link{lmFit}}
+  function.}
 }
 \value{
   \item{lmDME}{lmDME class object with the corresponding
@@ -34,41 +32,47 @@
 }
 \description{
   Linear model ANOVA decomposition of Designed Multivariate
-  Experiments based on limma lmFit implementation. For
-  example in a two factor experimental design with
-  interaction, the linear model of the i-th observation
-  (gene) can be written: \cr \eqn{X=\mu+A+B+AB+\epsilon}
-  \cr where \itemize{ \item X stands for the observed value
-  \item the intercept the intercept \eqn{\mu} \item A, B
-  and AB are the first, second and interaction terms
-  respectively \item The error term \eqn{\epsilon ~
-  N(0,\sigma^2)}.} The the model is iterative decomposed in
-  a step by step fashion decomposing one term at each time:
-  \cr \enumerate{ \item The intercept is estimated using
-  \eqn{X=\mu+E1} \item The first factor (A) using E1=A+E2
-  \item The second factor (B) using E2=B+E3 \item The
-  interaction (AB) using E3=AB+E4.} For each decomposed
-  step the model, residuals, coefficients, p-values and
-  F-values are stored in a list container, so their
-  corresponding length is equal to the number of model
-  terms + 1 (the intercept).
+  Experiments based on limma \code{\link{lmFit}}
+  implementation. For example in a two factor experimental
+  design with interaction, the linear model of the i-th
+  observation (gene) can be written: \cr
+  \eqn{X=\mu+A+B+AB+\epsilon} \cr where \itemize{ \item X
+  stands for the observed value \item the intercept
+  \eqn{\mu} \item A, B and AB are the first, second and
+  interaction terms respectively \item The error term
+  \eqn{\epsilon ~ N(0,\sigma^2)}. } The the model is
+  iterative decomposed in a step by step fashion
+  decomposing one term at each time: \enumerate{ \item The
+  intercept is estimated using \eqn{X=\mu+E_1} \item The
+  first factor (A) using \eqn{E_1=A+E_2} \item The second
+  factor (B) using \eqn{E_2=B+E_3} \item The interaction
+  (AB) using \eqn{E_3=AB+E_4}. } For each decomposed step
+  the model, residuals, coefficients, p-values and F-value
+  are stored in a list container, s their corresponding
+  length is equal to the number of model terms + 1 (the
+  intercept).
 }
 \section{Note}{
-  use \bold{lmdme} high level constructor for the creation
-  of the class instead of directely calling its constructor
-  by means of new.
+  use \bold{\code{\link{lmdme}}} high level constructor for
+  the creation of the class instead of directly calling its
+  constructor by means of new.
 }
 \examples{
-if (require(stemHypoxia)) {
-  data(stemHypoxia)
-  ##Just to make a balance dataset in the Fisher sense (2 samples per time*oxygen levels)
-  design<-design[design$time \%in\% c("0.5","1","5") & design$oxygen \%in\% c("1","5","21"),]
-  design$time <-as.factor(design$time)
-  design$oxygen<-as.factor(design$oxygen)
-  rownames(M)<-M[,1]
-  M <- M[,colnames(M) \%in\% design$samplename] #Keeping appropiate samples only
-  ##ANOVA decomposition
-  fit <- lmdme(model=~time+oxygen+time:oxygen,data=M,design=design)
+{
+data(stemHypoxia)
+
+##Just to make a balance dataset in the Fisher sense (2 samples per
+## time*oxygen levels)
+design<-design[design$time \%in\% c(0.5,1,5) & design$oxygen \%in\% c(1,5,21), ]
+design$time<-as.factor(design$time)
+design$oxygen<-as.factor(design$oxygen)
+rownames(M)<-M[, 1]
+
+#Keeping appropriate samples only
+M <- M[, colnames(M) \%in\% design$samplename]
+
+##ANOVA decomposition
+fit <- lmdme(model=~time+oxygen+time:oxygen, data=M, design=design)
 }
 }
 \author{

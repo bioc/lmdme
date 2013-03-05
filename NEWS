@@ -1,17 +1,51 @@
+lmdme 1.1.1
+----------------------------------------------------------------
+MINOR CHANGES
+
+* R code, documentation, examples, etc.  were modify to cope with Journal of
+Statistical Software style rules: i) 2 character spaces for indentation. 
+ii) lines with at most 80 characters. iii) avoid typo errors.
+
+* URL field in Description file was updated.
+
+DEPENDENCY CHANGES
+
+* stemHypoxia data package was moved back to Depends in order to avoid
+  if(required){ #on example code } (Thanks to Editor of Journal of Statistical
+  Software).
+
+lmdme 1.0.0
+----------------------------------------------------------------
+
+DEPENDENCY CHANGES
+
+* stemHypoxia data package was moved to Suggests and in examples included the
+  appropriate if(required){ #example code } (Thanks to Valerie Obenchain).
+
 lmdme 0.99.1
 ----------------------------------------------------------------
 
 MINOR CHANGES
 
-* Getters now accept a character vector in `term` parameter, in order to specify one than one term if required. In addition, `design` and `model` were added, and `pvalues` like `Fvalues` were changed to match slot names.  (Thanks to Valerie Obenchain)
+* Getters now accept a character vector in `term` parameter, in order to 
+specify one than one term if required. In addition, `design` and `model` were
+added, and `pvalues` like `Fvalues` were changed to match slot names.  (Thanks
+to Valerie Obenchain)
 
-* `lmdme` now works with NA presence in data matrix. This bug is related to lmFit intercept coefficient behavior, which breaks the data structure using drop (to numeric instead of keeping a matrix with one column) only if NA are present.
+* `lmdme` now works with NA presence in data matrix. This bug is related to 
+ lmFit intercept coefficient behavior, which breaks the data structure using 
+ drop (to numeric instead of keeping a matrix with one column) only if NA are
+ present.
 
-* `lmdme` is now the only constructor. Method `initialize` was erased due to different reasons as described in https://stat.ethz.ch/pipermail/bioc­devel/2012­August/003554.html
+* `lmdme` is now the only constructor. Method `initialize` was erased due to
+ different reasons as described in
+ https://stat.ethz.ch/pipermail/bioc­devel/2012­August/003554.html
 
-* `decomposition` example sections using `subset` parameter for simplicity (not all the data has to be decomposed in the example).
+* `decomposition` example sections using `subset` parameter for simplicity (not
+ all the data has to be decomposed in the example).
 
-* Enhance of `biplot` and `screeplot` functions with `term` and `mfcol` to simplify the graphic output specification.
+* Enhance of `biplot` and `screeplot` functions with `term` and `mfcol` to
+ simplify the graphic output specification.
 
 DOCUMENTATION
 
