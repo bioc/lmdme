@@ -99,9 +99,7 @@ fit<-lmdme(model=~time+oxygen+time:oxygen, data=M, design=design)
 ##different from zero (F-test over the coefficients).
 asca<-fit
 apca<-fit
-plsr.residuals<-fit
-plsr.coefficients<-fit
-id<-F.p.values(fit, term="time:oxygen")[[1]]<0.001
+id<-F.p.values(fit, term="time:oxygen")<0.001
 
 ##ASCA and APCA decomposition for every available term.
 decomposition(asca, decomposition="pca", subset=id, scale="row")
@@ -113,12 +111,15 @@ asca<-components(asca)
 apca<-components(apca)
 
 ##Now let's try the PLSR decomposition for residuals and coefficients
+plsr.residuals<-fit
+plsr.coefficients<-fit
 decomposition(plsr.coefficients, decomposition="plsr", subset=id,
 scale="row")
 decomposition(plsr.residuals, decomposition="plsr", subset=id, scale="row",
 type="residual")
 
 ##Obtain the coefficients for decomposed plsr objects
+##(coefficients/residuals)
 plsr.coefficients<-components(plsr.coefficients)
 plsr.residuals <- components(plsr.residuals)
 }

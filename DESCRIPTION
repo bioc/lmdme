@@ -1,8 +1,8 @@
 Package: lmdme
 Type: Package
 Title: Linear Model decomposition for Designed Multivariate Experiments
-Version: 1.1.1
-Date: 2013-03-05
+Version: 1.1.2
+Date: 2013-03-06
 Author: Cristobal Fresno and Elmer A. Fernandez
 Maintainer: Cristobal Fresno <cristobalfresno@gmail.com>
 Description: linear ANOVA decomposition of Multivariate 

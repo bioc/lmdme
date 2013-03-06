@@ -66,7 +66,7 @@ setMethod(f="leverage", signature="lmDME", definition=function(object,
     stop("ERROR: missing term")
   }
   ##Obtain the leverages
-  pca<-prcomp(coefficients(object, term=term)[[1]])
+  pca<-prcomp(coefficients(object, term=term))
   out<-data.frame(leverage=apply(pca$x[, comps]^2, 1, sum))
   out$over<-out$leverage > quantile(out$leverage, level)
   return(out)

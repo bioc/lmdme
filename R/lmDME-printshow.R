@@ -26,7 +26,7 @@
 #' ##Just to make a balance dataset in the Fisher sense (2 samples per 
 #' ## time*oxygen levels)
 #' design<-design[design$time %in% c(0.5, 1, 5) & design$oxygen %in% c(1,5,21),]
-#' design$time <-as.factor(design$time)
+#' design$time<-as.factor(design$time)
 #' design$oxygen<-as.factor(design$oxygen)
 #' rownames(M)<-M[, 1]
 #' 
@@ -62,11 +62,11 @@ setMethod(f="print", signature="lmDME", definition=function(x, term=NULL){
   }else{
     ##All the terms of the model
     cat("Residuals (head):\n")
-    print(lapply(residuals(x, term=term), head))
+    print(lapply(residuals(x, term=term, drop=FALSE), head))
     cat("Coefficients (head):\n")
-    print(lapply(coefficients(x, term=term), head))
+    print(lapply(coefficients(x, term=term, drop=FALSE), head))
     cat("P-Values (head):\n")
-    print(lapply(pvalues(x, term=term), head))
+    print(lapply(pvalues(x, term=term, drop=FALSE), head))
   }
 })
 #' @exportMethod show

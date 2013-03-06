@@ -94,9 +94,7 @@
 #' ##different from zero (F-test over the coefficients).
 #' asca<-fit
 #' apca<-fit
-#' plsr.residuals<-fit
-#' plsr.coefficients<-fit
-#' id<-F.p.values(fit, term="time:oxygen")[[1]]<0.001
+#' id<-F.p.values(fit, term="time:oxygen")<0.001
 #' 
 #' ##ASCA and APCA decomposition for every available term.
 #' decomposition(asca, decomposition="pca", subset=id, scale="row")
@@ -108,12 +106,15 @@
 #' apca<-components(apca) 
 #' 
 #' ##Now let's try the PLSR decomposition for residuals and coefficients
+#' plsr.residuals<-fit
+#' plsr.coefficients<-fit
 #' decomposition(plsr.coefficients, decomposition="plsr", subset=id,
 #'   scale="row")
 #' decomposition(plsr.residuals, decomposition="plsr", subset=id, scale="row",
 #'   type="residual")
 #' 
 #' ##Obtain the coefficients for decomposed plsr objects
+#' ##(coefficients/residuals)
 #' plsr.coefficients<-components(plsr.coefficients) 
 #' plsr.residuals <- components(plsr.residuals) 
 #' }
@@ -136,7 +137,7 @@ setGeneric(name="decomposition", def = function(object,
 #' @aliases decomposition,lmDME-method
 setMethod(f="decomposition", signature = "lmDME", definition = function(object,
   decomposition=c("pca","plsr"), term=NULL,
-  subset=1:nrow(object@residuals[[1]]), type = c("coefficient", "residual"),
+  subset=1:nrow(object@residuals[[1]]), type=c("coefficient", "residual"),
   scale=c("none","row","column"), Omatrix, ...){
   ##Obtain object name for future update
   nameObject<-deparse(substitute(object)) 
@@ -163,9 +164,9 @@ setMethod(f="decomposition", signature = "lmDME", definition = function(object,
   }
 
   ##Over which matrix is to be the carry the escalation and calculate it
-  data <- switch(type[1], 
-    coefficient = coefficients(object, term), 
-    residual = {
+  data<-switch(type[1], 
+    coefficient=coefficients(object, term, drop=FALSE), 
+    residual={
       ##Get the names of the term if missing
       if(is.null(term)){
         term<-names(object@modelDecomposition)[-1]

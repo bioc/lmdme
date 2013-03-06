@@ -45,7 +45,7 @@
 #' ##ASCA for all the available terms, over those subjects/genes where at least
 #' ##one interaction coefficient is statistically different from zero (F-test
 #' ##over the coefficients).
-#' id<-F.p.values(fit, term="time:oxygen")[[1]]<0.001
+#' id<-F.p.values(fit, term="time:oxygen")<0.001
 #' decomposition(fit, decomposition="pca",scale="row",subset=id) 
 #' 
 #' \dontrun{
@@ -65,7 +65,7 @@
 #' }
 #'
 #' ##Now using plsr over interaction coefficients
-#' decomposition(fit, decomposition="plsr", term ="time:oxygen", scale="row",
+#' decomposition(fit, decomposition="plsr", term="time:oxygen", scale="row",
 #'  subset=id)
 #'
 #' \dontrun{
@@ -89,7 +89,7 @@
 setMethod(f="biplot", signature="lmDME", definition=function(x, comp=1:2,
   xlab=NULL, ylab=NULL, term=NULL, mfcol, ...){
   ##Check that is at least one biplot available
-  component<-components(x, term=term)
+  component<-components(x, term=term, drop=FALSE)
   stopifnot(length(component)!=0)
 
   ##Check mfcol to adjust par parameter and creat the first biplot

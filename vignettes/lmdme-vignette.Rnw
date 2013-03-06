@@ -100,7 +100,7 @@ where a brief description of the used \emph{data} and \emph{design} information 
 So, now, let's choose those subjects/genes where at least one interaction coefficient is statistically different from zero (F-test over the coefficients) and perform ASCA over them.
 
 <<ASCA decomposition, echo=true>>=
-id<-F.p.values(fit,term="time:oxygen")[[1]]<0.001
+id<-F.p.values(fit,term="time:oxygen")<0.001
 sum(id) #The amount of genes for further exploration
 decomposition(fit,decomposition="pca", type="coefficient", 
               term="time:oxygen", subset=id, scale="row")
@@ -126,7 +126,7 @@ fit.plsr<-fit
 decomposition(fit.plsr,decomposition="plsr", type="coefficient", 
               term="time:oxygen", subset=id,scale="row")
 biplot(fit.plsr, which = "loadings", xlabs=rep("o",sum(id)), 
-      ylabs=colnames(coefficients(fit.plsr,term="time:oxygen")[[1]]),
+      ylabs=colnames(coefficients(fit.plsr,term="time:oxygen")),
        var.axes=TRUE, mfcol=NULL)
 @
 
@@ -134,7 +134,7 @@ biplot(fit.plsr, which = "loadings", xlabs=rep("o",sum(id)),
  \begin{center}
 <<PLS_biplot, fig=TRUE, results=hide, echo=false>>=
 biplot(fit.plsr, which = "loadings", xlabs=rep("o",sum(id)), 
-      ylabs=colnames(coefficients(fit.plsr,term="time:oxygen")[[1]]),var.axes=TRUE, mfcol=NULL)
+      ylabs=colnames(coefficients(fit.plsr,term="time:oxygen")),var.axes=TRUE, mfcol=NULL)
 @
   \end{center}
   \label{fig:plsbiplot}

@@ -1,3 +1,15 @@
+lmdme 1.1.2
+----------------------------------------------------------------
+MINOR CHANGES
+
+* Getters functions for lmDME class now have drop=TRUE parameter, in order to
+avoid using [[1]] when only one term/component is returned (Thanks to Elmer
+Fernandez).
+
+DOCUMENTATION
+
+* Missing usage functions helps for F.p.values, p.values, etc. were added.
+
 lmdme 1.1.1
 ----------------------------------------------------------------
 MINOR CHANGES

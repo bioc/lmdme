@@ -64,16 +64,18 @@ setMethod(f="permutation", signature=signature(model="formula",
   data="data.frame", design="data.frame"), definition=function(model, data,
   design, Bayes=FALSE, verbose=FALSE, NPermutations=100, nCpus=1, ...){
   ##Generate the permuted samples: original structure + NPermutations
-  permutations <- cbind(1:ncol(data),
+  permutations<-cbind(1:ncol(data),
     sapply(1:NPermutations, function(iteration, indexes){sample(indexes)},
     indexes=1:ncol(data)))
   
-  ## Auxiliary functions, print if verbose==TRUE
+  ##Auxiliary functions, print if verbose==TRUE
   if(verbose){
     printnow<-function(...){ cat(...);flush.console()}
   }else{
     printnow<-function(...){invisible (NULL)}
   }
+
+  ##Auxiliary functions for parallel processing if available
   if(require(parallel)){
     parlapply<-mclapply
     ##Get the cpus data for parallel lmdme calculation
@@ -86,7 +88,7 @@ setMethod(f="permutation", signature=signature(model="formula",
     }
   }
   else{
-    ##parallel not installed
+    ##parallel not installed so, use the well known lapply
     parlapply<-function(X, FUN, ..., mc.cores){lapply(X, FUN, ...)}
   }
 
@@ -110,6 +112,7 @@ setMethod(f="permutation", signature=signature(model="formula",
     printnow("Running Model: ", index, "\n")
     return(lmdme(model=model, data=data[, permutations[,index]], design=design,
       Bayes=Bayes, verbose=verbose, ...))}, mc.cores = nCpus)
+  ##End calculations
   timeEnd <- Sys.time()
   printnow("End Time", as.character(timeEnd), "\n")
   timedifference<-timeEnd-time

@@ -7,7 +7,8 @@
 \alias{p.adjust-methods}
 \title{\code{p.adjust} of p-values for Multiple Test Comparisons Correction}
 \usage{
-  \S4method{p.adjust}{lmDME}(p, term, method)
+  \S4method{p.adjust}{lmDME}(p, term=NULL,
+  method=p.adjust.methods, drop=TRUE)
 }
 \arguments{
   \item{p}{numeric vector of p-values as in stats::p.adjust
@@ -20,6 +21,9 @@
   return.}
 
   \item{...}{other arguments.}
+
+  \item{drop}{should try to drop list structure if
+  length==1? Default value is TRUE}
 }
 \value{
   according to the call one of the following objects can be
@@ -53,9 +57,9 @@ fit<-lmdme(model=~time+oxygen+time:oxygen, data=M, design=design)
 
 ##Adjust p-values only over interaction p.values using false discovery rate
 ## method
-pInteraction<-p.values(fit, term="time:oxygen")[[1]]
-FDRIntercept<-p.adjust(fit, term="time:oxygen", method="fdr")[[1]]
-corrected<-sum(pInteraction < 0.05) - sum(FDRIntercept < 0.05)
+pInteraction<-p.values(fit, term="time:oxygen")
+FDRInteraction<-p.adjust(fit, term="time:oxygen", method="fdr")
+corrected<-sum(pInteraction < 0.05) - sum(FDRInteraction < 0.05)
 }
 }
 \author{

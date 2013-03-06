@@ -6,6 +6,8 @@
 #' @param method correction method available in \code{\link{p.adjust.methods}}.
 #' @param term character with the corresponding term to return.
 #' @param ... other arguments.
+#' @param drop should try to drop list structure if length==1? Default value
+#' is TRUE 
 #'
 #' @return according to the call one of the following objects can be returned
 #' \item{numeric}{vector of adjusted p-values.}
@@ -37,9 +39,9 @@
 #' 
 #' ##Adjust p-values only over interaction p.values using false discovery rate
 #' ## method
-#' pInteraction<-p.values(fit, term="time:oxygen")[[1]] 
-#' FDRIntercept<-p.adjust(fit, term="time:oxygen", method="fdr")[[1]]
-#' corrected<-sum(pInteraction < 0.05) - sum(FDRIntercept < 0.05)
+#' pInteraction<-p.values(fit, term="time:oxygen") 
+#' FDRInteraction<-p.adjust(fit, term="time:oxygen", method="fdr")
+#' corrected<-sum(pInteraction < 0.05) - sum(FDRInteraction < 0.05)
 #' }
 #'
 #' @exportMethod p.adjust
@@ -60,10 +62,18 @@ setMethod(f="p.adjust", signature="ANY", definition=stats::p.adjust)
 #' @name lmDME-padjust
 #' @rdname lmDME-padjust
 #' @inheritParams p.adjust
-#' @usage \S4method{p.adjust}{lmDME}(p, term, method)
+#' @usage \S4method{p.adjust}{lmDME}(p, term=NULL, method=p.adjust.methods, drop=TRUE)
 #' @aliases p.adjust,lmDME-method
 setMethod(f="p.adjust", signature="lmDME", definition=function(p, term=NULL,
-  method=p.adjust.methods){
-  return(lapply(p.values(p, term), function(x){apply(x, MARGIN=2, FUN=p.adjust,
-    method= method)}))
+  method=p.adjust.methods, drop=TRUE){
+  out<-lapply(p.values(p, term, drop=FALSE), function(x){
+    apply(x, MARGIN=2, FUN=p.adjust, method=method)
+  })
+
+  ##Check for drop parameter
+  if(drop & length(out)==1){
+    out<-out[[1]]
+  }
+
+  return(out)
 })

@@ -41,7 +41,7 @@
 #' ##ASCA for all the available terms, over those subjects/genes where at least
 #' ##one interaction coefficient is statistically different from zero (F-test
 #' ##over the coefficients).
-#' id<-F.p.values(fit, term="time:oxygen")[[1]]<0.001
+#' id<-F.p.values(fit, term="time:oxygen")<0.001
 #' decomposition(fit, decomposition="pca", scale="row", subset=id) 
 #'
 #' \dontrun{

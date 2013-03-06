@@ -2,43 +2,83 @@
 \name{fitted.values}
 \alias{F.p.values}
 \alias{F.p.values,lmDME-method}
+\alias{F.p.values-methods}
 \alias{coef}
 \alias{coef,lmDME-method}
 \alias{coefficients}
 \alias{coefficients,lmDME-method}
 \alias{components}
 \alias{components,lmDME-method}
+\alias{components-methods}
 \alias{componentsType}
 \alias{componentsType,lmDME-method}
+\alias{componentsType-methods}
 \alias{design}
 \alias{design,lmDME-method}
+\alias{design-methods}
 \alias{fitted}
 \alias{fitted,lmDME-method}
 \alias{fitted.values}
 \alias{fitted.values,lmDME-method}
 \alias{model}
 \alias{model,lmDME-method}
+\alias{model-methods}
 \alias{modelDecomposition}
 \alias{modelDecomposition,lmDME-method}
+\alias{modelDecomposition-methods}
 \alias{p.values}
 \alias{p.values,lmDME-method}
+\alias{p.values-methods}
 \alias{resid}
 \alias{resid,lmDME-method}
 \alias{residuals}
 \alias{residuals,lmDME-method}
 \title{Getters for lmDME object}
 \usage{
-  \S4method{fitted.values}{lmDME}(object, term)
+  \S4method{fitted.values}{lmDME}(object, term=NULL,
+  drop=TRUE)
 
-  \S4method{fitted}{lmDME}(object, term)
+  \S4method{fitted}{lmDME}(object, term=NULL, drop=TRUE)
 
-  \S4method{coef}{lmDME}(object, term)
+  \S4method{coef}{lmDME}(object, term=NULL, drop=TRUE)
 
-  \S4method{coefficients}{lmDME}(object, term)
+  \S4method{coefficients}{lmDME}(object, term=NULL,
+  drop=TRUE)
 
-  \S4method{resid}{lmDME}(object,term)
+  \S4method{resid}{lmDME}(object, term=NULL, drop=TRUE)
 
-  \S4method{residuals}{lmDME}(object, term)
+  \S4method{residuals}{lmDME}(object, term=NULL, drop=TRUE)
+
+  F.p.values(object, term=NULL, drop=TRUE)
+
+  \S4method{F.p.values}{lmDME}(object, term=NULL,
+  drop=TRUE)
+
+  p.values(object, term=NULL, drop=TRUE)
+
+  \S4method{p.values}{lmDME}(object, term=NULL, drop=TRUE)
+
+  modelDecomposition(object, term=NULL, drop=TRUE)
+
+  \S4method{modelDecomposition}{lmDME}(object, term=NULL,
+  drop=TRUE)
+
+  components(object, term=NULL, drop=TRUE)
+
+  \S4method{components}{lmDME}(object, term=NULL,
+  drop=TRUE)
+
+  componentsType(object)
+
+  \S4method{componentsType}{lmDME}(object)
+
+  model(object)
+
+  \S4method{model}{lmDME}(object)
+
+  design(object)
+
+  \S4method{design}{lmDME}(object)
 }
 \arguments{
   \item{object}{lmDME class object.}
@@ -46,6 +86,9 @@
   \item{term}{character with the corresponding term/s to
   return. Default value is NULL in order to return every
   available term/s.}
+
+  \item{drop}{should try to drop list structure if
+  length==1? Default value is TRUE}
 }
 \value{
   according to the call one of the following objects can be
