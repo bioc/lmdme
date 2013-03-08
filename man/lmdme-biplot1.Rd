@@ -1,14 +1,14 @@
 \docType{methods}
 \name{biplot}
 \alias{biplot}
-\alias{biplot,lmDME-method}
-\title{Plot a \code{biplot} of a lmDME object}
+\alias{biplot,lmdme-method}
+\title{Plot a \code{biplot} of a lmdme object}
 \usage{
-  \S4method{biplot}{lmDME}(x, comp=1:2, xlab=NULL,
+  \S4method{biplot}{lmdme}(x, comp=1:2, xlab=NULL,
   ylab=NULL, term=NULL, mfcol, ...)
 }
 \arguments{
-  \item{x}{lmDME class object.}
+  \item{x}{lmdme class object.}
 
   \item{comp}{a two component vector with the PC components
   to plot. Default comp=1:2.}
@@ -34,13 +34,13 @@
 }
 \value{
   plotted biplot/s of the components slot of the given
-  lmDME object. If \code{\link{par}}() is called before
+  lmdme object. If \code{\link{par}}() is called before
   this function, the biplots can be arranged in the same
   window
 }
 \description{
   Plot a biplot over each decomposed "pca" or "plsr"
-  present in lmDME components object's slot.
+  present in lmdme components object's slot.
 }
 \examples{
 {

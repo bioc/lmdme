@@ -1,11 +1,11 @@
 \docType{methods}
 \name{leverage}
 \alias{leverage}
-\alias{leverage,lmDME-method}
+\alias{leverage,lmdme-method}
 \alias{leverage-methods}
-\title{\code{leverage} test of lmDME objects}
+\title{\code{leverage} test of lmdme objects}
 \arguments{
-  \item{object}{lmDME class object.}
+  \item{object}{lmdme class object.}
 
   \item{comps}{a numeric vector indicating the PCA
   component indexes to keep. Default the first two

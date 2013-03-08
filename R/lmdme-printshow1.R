@@ -1,16 +1,16 @@
-#' \code{Show}, \code{Print} or \code{Summary} a lmDME object
+#' \code{Show}, \code{Print} or \code{Summary} a lmdme object
 #'
-#' Generic Show/Print/Summary method for lmDME class output visualization.
+#' Generic Show/Print/Summary method for lmdme class output visualization.
 #'
-#' @param x lmDME class object.
-#' @param object lmDME class object.
+#' @param x lmdme class object.
+#' @param object lmdme class object.
 #' @param term character with the corresponding term to return. Default value 
 #'  is NULL to return every decomposed term (if more than one available).
 #'
 #' @return according to the call
 #'  \item{print, show or summary:}{console output text with increasing detail of
-#'  lmDME object.}
-#'  \item{show or summary}{console output text of the lmDME object, plus a 
+#'  lmdme object.}
+#'  \item{show or summary}{console output text of the lmdme object, plus a 
 #'  data.frame with model decomposition summary data.}
 #'
 #' @seealso \code{\link{lmdme}}, \code{\link{coef}}, \code{\link{resid}}, 
@@ -46,10 +46,10 @@
 #' @exportMethod print
 #' @docType methods
 #' @name print
-#' @rdname lmDME-printshow
-#' @usage \S4method{print}{lmDME}(x, term)
-#' @aliases print,lmDME-method
-setMethod(f="print", signature="lmDME", definition=function(x, term=NULL){
+#' @rdname lmdme-printshow
+#' @usage \S4method{print}{lmdme}(x, term)
+#' @aliases print,lmdme-method
+setMethod(f="print", signature="lmdme", definition=function(x, term=NULL){
    show(x)
    ##If term is available the data of the corresponding term
    if(!missing(term)){
@@ -71,13 +71,13 @@ setMethod(f="print", signature="lmDME", definition=function(x, term=NULL){
 })
 #' @exportMethod show
 #' @name show
-#' @rdname lmDME-printshow
+#' @rdname lmdme-printshow
 #' @inheritParams print
-#' @usage \S4method{show}{lmDME}(object)
-#' @aliases show,lmDME-method
-setMethod(f="show", signature="lmDME", definition=function(object){
-    ##Basic information of lmDME class
-    cat("lmDME object: \n")
+#' @usage \S4method{show}{lmdme}(object)
+#' @aliases show,lmdme-method
+setMethod(f="show", signature="lmdme", definition=function(object){
+    ##Basic information of lmdme class
+    cat("lmdme object: \n")
     cat("Data dimension: ", nrow(object@residuals[[1]])," x ", 
       ncol(object@residuals[[1]]))
     cat("\nDesign (head): \n")
@@ -97,10 +97,10 @@ setMethod(f="show", signature="lmDME", definition=function(object){
 #'
 #' @exportMethod summary 
 #' @name summary
-#' @rdname lmDME-printshow
+#' @rdname lmdme-printshow
 #' @inheritParams show
-#' @usage \S4method{summary}{lmDME}(object)
-#' @aliases summary,lmDME-method
-setMethod(f="summary", signature="lmDME", definition=function(object){
+#' @usage \S4method{summary}{lmdme}(object)
+#' @aliases summary,lmdme-method
+setMethod(f="summary", signature="lmdme", definition=function(object){
   return(show(object))
 })

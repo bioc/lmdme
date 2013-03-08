@@ -1,16 +1,18 @@
-#' \code{permutation} of the specified lmDME object
+#' \code{permutation} of the specified lmdme object
 #'
-#' Produces de specified lmDME plus the required permuted objects (sampling the
+#' Produces de specified lmdme plus the required permuted objects (sampling the
 #' columns), using the same parameters to fit the additional models.
 #' 
 #' @param model formula object to carry out the decomposition.
-#' @param data data.frame with individuals (rows) and samples/conditions (columns)
+#' @param data data.frame with individuals (rows) and samples/conditions
+#' (columns)
 #' @param design data.frame with the design of the experiment, (rows) 
 #'  samples/conditions as in data columns and as many columns to indicate the
 #'  factors presents in each sample.
 #' @param Bayes Should limma estimate empirical Bayes statistics, i. e., 
 #'  moderated t-statistics? Default value is FALSE.
-#' @param verbose Should the process progress be printed? Default value is FALSE.
+#' @param verbose Should the process progress be printed? Default value is
+#' FALSE.
 #' @param NPermutations number of permutations to be calculated. Default value 
 #'  is 100.
 #' @param nCpus number of cores to be used. Default value is 1, i.e. sequential
@@ -18,7 +20,7 @@
 #' @param ... Additional parameters for \code{\link{lmFit}} function.
 #'
 #' @return 
-#'  \item{list}{contains the original lmDME object plus the required amount 
+#'  \item{list}{contains the original lmdme object plus the required amount 
 #'  of permuted versions.} 
 #'
 #' @seealso \code{\link{lmdme}}
@@ -48,7 +50,7 @@
 #' @exportMethod permutation
 #' @docType methods
 #' @name permutation
-#' @rdname lmDME-permutation
+#' @rdname lmdme-permutation
 #' @aliases permutation-methods
 setGeneric(name="permutation", def=function(model, data, design, Bayes=FALSE,
   verbose=FALSE, NPermutations=100, nCpus=1, ...){
@@ -56,7 +58,7 @@ setGeneric(name="permutation", def=function(model, data, design, Bayes=FALSE,
 })
 #'
 #' @name permutation
-#' @rdname lmDME-permutation
+#' @rdname lmdme-permutation
 #' @inheritParams permutation
 #' @usage \S4method{permutation}{formula,data.frame,data.frame}(model,data,design,Bayes=FALSE,verbose=FALSE,NPermutations=100,nCpus=1,...)
 #' @aliases permutation,formula,data.frame,data.frame-method

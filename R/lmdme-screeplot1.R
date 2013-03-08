@@ -1,8 +1,8 @@
-#' Plot a \code{screeplot} of a PCA decomposed lmDME object
+#' Plot a \code{screeplot} of a PCA decomposed lmdme object
 #' 
-#' Screeplot over each decomposed "pca" model present in lmDME components slot.
+#' Screeplot over each decomposed "pca" model present in lmdme components slot.
 #'
-#' @param x lmDME class object.
+#' @param x lmdme class object.
 #' @param independent logical indicating whether the screeplots should be
 #'  plotted together. Default value is FALSE.
 #' @param col which color to use for each decomposed model. Default value
@@ -70,10 +70,10 @@
 #' @exportMethod screeplot
 #' @docType methods
 #' @name screeplot
-#' @rdname lmDME-screeplot
-#' @usage \S4method{screeplot}{lmDME}(x, independent=TRUE, col=seq(along=components(x)), npcs, term=NULL, mfcol, ...)
-#' @aliases screeplot,lmDME-method
-setMethod(f="screeplot", signature="lmDME", definition=function(x,
+#' @rdname lmdme-screeplot
+#' @usage \S4method{screeplot}{lmdme}(x, independent=TRUE, col=seq(along=components(x)), npcs, term=NULL, mfcol, ...)
+#' @aliases screeplot,lmdme-method
+setMethod(f="screeplot", signature="lmdme", definition=function(x,
   independent=TRUE, col=seq(along=components(x)), npcs, term=NULL, mfcol, ...){
   ##Check is componentType is available
   if(length(componentsType(x))==0){

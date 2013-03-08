@@ -1,6 +1,6 @@
-\name{lmDME-class}
-\alias{lmDME-class}
-\title{lmDME S4 class: Linear Model decomposition for Designed Multivariate
+\name{lmdme-class}
+\alias{lmdme-class}
+\title{lmdme S4 class: Linear Model decomposition for Designed Multivariate
 Experiments.}
 \description{
   Linear Model ANOVA decomposition of Designed Multivariate
@@ -53,9 +53,9 @@ Experiments.}
   ANOVA-SCA) and scale ("none", "row" or "column") }
 }
 
-\section{lmDME-general-functions}{
-  \describe{ \item{print, show}{Basic output for lmDME
-  class} \item{summary}{Basic statistics for lmDME class}
+\section{lmdme-general-functions}{
+  \describe{ \item{print, show}{Basic output for lmdme
+  class} \item{summary}{Basic statistics for lmdme class}
   \item{design, model, modelDecomposition, residuals and
   coefficients}{Getters for their respective slots.}
   \item{p.values, F.p.values, components and
@@ -122,6 +122,6 @@ Experiments.}
 \seealso{
   \code{\link{lmdme}}, \code{\link{decomposition}},
   \code{\link{biplot}}, \code{\link{loadingplot}} and
-  additional related lmDME class functions.
+  additional related lmdme class functions.
 }
 

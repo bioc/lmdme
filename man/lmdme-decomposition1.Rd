@@ -1,11 +1,11 @@
 \docType{methods}
 \name{decomposition}
 \alias{decomposition}
-\alias{decomposition,lmDME-method}
+\alias{decomposition,lmdme-method}
 \alias{decomposition-methods}
-\title{\code{decomposition} of lmDME object}
+\title{\code{decomposition} of lmdme object}
 \arguments{
-  \item{object}{lmDME class object.}
+  \item{object}{lmdme class object.}
 
   \item{decomposition}{character to indicate the
   decomposition to be carry out, i.e., \emph{"pca"} or
@@ -44,7 +44,7 @@
   decomposition call.}
 }
 \value{
-  Internal update of the "components" slot of the lmDME
+  Internal update of the "components" slot of the lmdme
   object, which is a list of \code{\link{prcomp}} or a list
   of mvr (\code{\link{plsr}}) objects using the given term
   parameter. If missing(term), the length of the list equal
@@ -56,7 +56,7 @@
   This function calculates the decomposition of variance or
   covariance structure using Principal Components Analysis
   (PCA) or Partial Least Squared Regression (PLSR), over
-  ANOVA decomposed lmDME object. In this context, in a two
+  ANOVA decomposed lmdme object. In this context, in a two
   factor experimental design with interaction, the linear
   model of the i-th observation (gene) can be written: \cr
   \eqn{X=\mu+X_{A}+X_{B}+X_{AB}+\epsilon} \cr where

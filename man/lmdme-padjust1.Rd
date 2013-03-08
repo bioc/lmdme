@@ -1,18 +1,18 @@
 \docType{methods}
 \name{p.adjust}
-\alias{lmDME-padjust}
+\alias{lmdme-padjust}
 \alias{p.adjust}
 \alias{p.adjust,ANY-method}
-\alias{p.adjust,lmDME-method}
+\alias{p.adjust,lmdme-method}
 \alias{p.adjust-methods}
 \title{\code{p.adjust} of p-values for Multiple Test Comparisons Correction}
 \usage{
-  \S4method{p.adjust}{lmDME}(p, term=NULL,
+  \S4method{p.adjust}{lmdme}(p, term=NULL,
   method=p.adjust.methods, drop=TRUE)
 }
 \arguments{
   \item{p}{numeric vector of p-values as in stats::p.adjust
-  or lmDME class object.}
+  or lmdme class object.}
 
   \item{method}{correction method available in
   \code{\link{p.adjust.methods}}.}
@@ -28,7 +28,7 @@
 \value{
   according to the call one of the following objects can be
   returned \item{numeric}{vector of adjusted p-values.}
-  \item{matrix}{for lmDME object If term!=NULL, the
+  \item{matrix}{for lmdme object If term!=NULL, the
   corresponding character is looked up within list of
   p.values returning the associated matrix of G
   rows(individuals) x k columns(levels of the corresponding

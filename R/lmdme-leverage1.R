@@ -1,10 +1,10 @@
-#' \code{leverage} test of lmDME objects
+#' \code{leverage} test of lmdme objects
 #' 
 #' This function calculates the leverage test for each individual using the 
 #' Principal Component Analysis (comps function) over the coefficients of the
 #' given decomposed model term.
 #'
-#' @param object lmDME class object.
+#' @param object lmdme class object.
 #' @param comps a numeric vector indicating the PCA component indexes to keep. 
 #'  Default the first two components (1:2).
 #' @param term a character specifying the model term. 
@@ -49,17 +49,17 @@
 #' @exportMethod leverage
 #' @docType methods
 #' @name leverage
-#' @rdname lmDME-leverage
+#' @rdname lmdme-leverage
 #' @aliases leverage-methods
 setGeneric(name="leverage", def=function(object, comps=1:2, term, level=0.95){
   standardGeneric("leverage")
 })
 #'
 #' @name leverage
-#' @rdname lmDME-leverage
+#' @rdname lmdme-leverage
 #' @inheritParams leverage
-#' @aliases leverage,lmDME-method
-setMethod(f="leverage", signature="lmDME", definition=function(object,
+#' @aliases leverage,lmdme-method
+setMethod(f="leverage", signature="lmdme", definition=function(object,
   comps=1:2, term, level=0.95){
   ##Check for term presence
   if(missing(term)){

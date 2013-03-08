@@ -1,4 +1,4 @@
-#' High level constructor of lmDME class object
+#' High level constructor of lmdme class object
 #'
 #' Linear model ANOVA decomposition of Designed Multivariate Experiments based 
 #' on limma \code{\link{lmFit}} implementation. For example in a two factor
@@ -32,11 +32,12 @@
 #'  factors presents in each sample.
 #' @param Bayes Should limma estimate empirical Bayes statistics, i. e., 
 #'  moderated t-statistics? Default value is FALSE.
-#' @param verbose Should the process progress be printed? Default value is FALSE.
+#' @param verbose Should the process progress be printed? Default value is
+#' FALSE.
 #' @param ... Additional parameters for \code{\link{lmFit}} function.
 #'
 #' @return 
-#'  \item{lmDME}{lmDME class object with the corresponding completed slots 
+#'  \item{lmdme}{lmdme class object with the corresponding completed slots 
 #'  according to the given model} 
 #'   
 #' @section Note: use \bold{\code{\link{lmdme}}} high level constructor for the
@@ -76,13 +77,13 @@
 #' @exportMethod lmdme
 #' @docType methods
 #' @name lmdme
-#' @rdname lmDME-lmdme
+#' @rdname lmdme-lmdme
 #' @aliases lmdme-methods
 setGeneric(name="lmdme",def = function(model, data, design, Bayes=FALSE,
   verbose=FALSE, ...){standardGeneric("lmdme")})
 #'
 #' @name lmdme
-#' @rdname lmDME-lmdme
+#' @rdname lmdme-lmdme
 #' @inheritParams lmdme
 #' @aliases lmdme,formula,ANY,data.frame-method
 setMethod(f="lmdme", signature=signature(model="formula", data="ANY",
@@ -104,7 +105,7 @@ setMethod(f="lmdme", signature=signature(model="formula", data="ANY",
     "-1")))
 
   ##Initialization of different slots
-  .Object<-new("lmDME")
+  .Object<-new("lmdme")
   .Object@design<-design
   .Object@model<-model
   .Object@residuals<-vector("list", length(terminos))

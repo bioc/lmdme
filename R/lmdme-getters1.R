@@ -1,10 +1,10 @@
-#' Getters for lmDME object
+#' Getters for lmdme object
 #'
-#' Obtain lmDME slot information, according to the given function call (see
+#' Obtain lmdme slot information, according to the given function call (see
 #' Values). If term parameter is not specified, it will return all the available
 #' terms. Otherwise, just the one specified.
 #' 
-#' @param object lmDME class object.
+#' @param object lmdme class object.
 #' @param term character with the corresponding term/s to return. Default value
 #' is NULL in order to return every available term/s.
 #' @param drop should try to drop list structure if length==1? Default value
@@ -68,11 +68,11 @@
 #' @exportMethod fitted.values
 #' @docType methods
 #' @name fitted.values
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @importFrom stats fitted.values
-#' @usage \S4method{fitted.values}{lmDME}(object, term=NULL, drop=TRUE)
-#' @aliases fitted.values,lmDME-method
-setMethod(f="fitted.values", signature="lmDME", definition=function(object,
+#' @usage \S4method{fitted.values}{lmdme}(object, term=NULL, drop=TRUE)
+#' @aliases fitted.values,lmdme-method
+setMethod(f="fitted.values", signature="lmdme", definition=function(object,
   term=NULL, drop=TRUE){  
   ##If Term == NULL the full decomposed fitted.values
   if(is.null(term)){
@@ -110,24 +110,24 @@ setMethod(f="fitted.values", signature="lmDME", definition=function(object,
 #'
 #' @exportMethod fitted
 #' @name fitted
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
 #' @importFrom stats fitted
-#' @usage \S4method{fitted}{lmDME}(object, term=NULL, drop=TRUE)
-#' @aliases fitted,lmDME-method
-setMethod(f="fitted", signature = "lmDME", definition=function(object,
+#' @usage \S4method{fitted}{lmdme}(object, term=NULL, drop=TRUE)
+#' @aliases fitted,lmdme-method
+setMethod(f="fitted", signature = "lmdme", definition=function(object,
   term=NULL, drop=TRUE){
   return(fitted.values(object, term, drop))
 })
 #'
 #' @exportMethod coef
 #' @name coef
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
 #' @importFrom stats coef
-#' @usage \S4method{coef}{lmDME}(object, term=NULL, drop=TRUE)
-#' @aliases coef,lmDME-method
-setMethod(f="coef", signature = "lmDME", definition = function(object,
+#' @usage \S4method{coef}{lmdme}(object, term=NULL, drop=TRUE)
+#' @aliases coef,lmdme-method
+setMethod(f="coef", signature = "lmdme", definition = function(object,
   term=NULL, drop=TRUE){
   ##If Term == NULL the full decomposed coefficients
   if(is.null(term)){
@@ -151,24 +151,24 @@ setMethod(f="coef", signature = "lmDME", definition = function(object,
 #'
 #' @exportMethod coefficients
 #' @name coefficients
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
 #' @importFrom stats coefficients
-#' @usage \S4method{coefficients}{lmDME}(object, term=NULL, drop=TRUE)
-#' @aliases coefficients,lmDME-method
-setMethod(f="coefficients", signature="lmDME", definition=function(object,
+#' @usage \S4method{coefficients}{lmdme}(object, term=NULL, drop=TRUE)
+#' @aliases coefficients,lmdme-method
+setMethod(f="coefficients", signature="lmdme", definition=function(object,
   term=NULL, drop=TRUE){
   return(coef(object, term, drop))
 })
 #'
 #' @exportMethod resid
 #' @name resid
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
 #' @importFrom stats resid
-#' @usage \S4method{resid}{lmDME}(object, term=NULL, drop=TRUE)
-#' @aliases resid,lmDME-method
-setMethod(f="resid", signature = "lmDME", definition=function(object,
+#' @usage \S4method{resid}{lmdme}(object, term=NULL, drop=TRUE)
+#' @aliases resid,lmdme-method
+setMethod(f="resid", signature = "lmdme", definition=function(object,
   term=NULL, drop=TRUE){
   ##If Term == NULL the full decomposed residuals
   if(is.null(term)){
@@ -192,19 +192,19 @@ setMethod(f="resid", signature = "lmDME", definition=function(object,
 #'
 #' @exportMethod residuals
 #' @name residuals
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
 #' @importFrom stats residuals
-#' @usage \S4method{residuals}{lmDME}(object, term=NULL, drop=TRUE)
-#' @aliases residuals,lmDME-method
-setMethod(f="residuals", signature="lmDME", definition=function(object,
+#' @usage \S4method{residuals}{lmdme}(object, term=NULL, drop=TRUE)
+#' @aliases residuals,lmdme-method
+setMethod(f="residuals", signature="lmdme", definition=function(object,
   term=NULL, drop=TRUE){
   return(resid(object, term, drop))
 })
 #'
 #' @exportMethod F.p.values
 #' @name F.p.values
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
 #' @usage F.p.values(object, term=NULL, drop=TRUE)
 #' @aliases F.p.values-methods
@@ -213,11 +213,11 @@ setGeneric(name="F.p.values", def=function(object, term=NULL, drop=TRUE){
 })
 #'
 #' @name F.p.values
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
-#' @usage \S4method{F.p.values}{lmDME}(object, term=NULL, drop=TRUE)
-#' @aliases F.p.values,lmDME-method
-setMethod(f="F.p.values", signature="lmDME", definition=function(object,
+#' @usage \S4method{F.p.values}{lmdme}(object, term=NULL, drop=TRUE)
+#' @aliases F.p.values,lmdme-method
+setMethod(f="F.p.values", signature="lmdme", definition=function(object,
   term=NULL, drop=TRUE){
   ##If Term == NULL the full decomposed F.p.values    
   if(is.null(term)){
@@ -241,7 +241,7 @@ setMethod(f="F.p.values", signature="lmDME", definition=function(object,
 #'
 #' @exportMethod p.values
 #' @name p.values
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
 #' @usage p.values(object, term=NULL, drop=TRUE)
 #' @aliases p.values-methods
@@ -250,11 +250,11 @@ setGeneric(name="p.values", def=function(object, term=NULL, drop=TRUE){
 })
 #'
 #' @name p.values
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
-#' @usage \S4method{p.values}{lmDME}(object, term=NULL, drop=TRUE)
-#' @aliases p.values,lmDME-method
-setMethod(f="p.values", signature="lmDME", definition=function(object,
+#' @usage \S4method{p.values}{lmdme}(object, term=NULL, drop=TRUE)
+#' @aliases p.values,lmdme-method
+setMethod(f="p.values", signature="lmdme", definition=function(object,
   term=NULL, drop=TRUE){
   ##If Term == NULL the full decomposed p.values
   if(is.null(term)){
@@ -278,7 +278,7 @@ setMethod(f="p.values", signature="lmDME", definition=function(object,
 #'
 #' @exportMethod modelDecomposition
 #' @name modelDecomposition
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
 #' @usage modelDecomposition(object, term=NULL, drop=TRUE)
 #' @aliases modelDecomposition-methods
@@ -288,11 +288,11 @@ setGeneric(name="modelDecomposition", def=function(object, term=NULL,
 })
 #'
 #' @name modelDecomposition
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
-#' @usage \S4method{modelDecomposition}{lmDME}(object, term=NULL, drop=TRUE)
-#' @aliases modelDecomposition,lmDME-method
-setMethod(f="modelDecomposition", signature="lmDME", definition=function(object,
+#' @usage \S4method{modelDecomposition}{lmdme}(object, term=NULL, drop=TRUE)
+#' @aliases modelDecomposition,lmdme-method
+setMethod(f="modelDecomposition", signature="lmdme", definition=function(object,
   term=NULL, drop=TRUE){
   ##If Term == NULL the full decomposed models
   if(is.null(term)){
@@ -316,7 +316,7 @@ setMethod(f="modelDecomposition", signature="lmDME", definition=function(object,
 #'
 #' @exportMethod components
 #' @name components
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
 #' @usage components(object, term=NULL, drop=TRUE)
 #' @aliases components-methods
@@ -325,11 +325,11 @@ setGeneric(name="components", def=function(object, term=NULL, drop=TRUE){
 })
 #'
 #' @name components
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
-#' @usage \S4method{components}{lmDME}(object, term=NULL, drop=TRUE)
-#' @aliases components,lmDME-method
-setMethod(f="components", signature="lmDME", definition=function(object,
+#' @usage \S4method{components}{lmdme}(object, term=NULL, drop=TRUE)
+#' @aliases components,lmdme-method
+setMethod(f="components", signature="lmdme", definition=function(object,
   term=NULL, drop=TRUE){
   ##If Term == NULL the full decomposed models
   if(is.null(term)){
@@ -354,7 +354,7 @@ setMethod(f="components", signature="lmDME", definition=function(object,
 #'
 #' @exportMethod componentsType
 #' @name componentsType
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
 #' @usage componentsType(object)
 #' @aliases componentsType-methods
@@ -363,45 +363,45 @@ setGeneric(name="componentsType", def=function(object){
 })
 #'
 #' @name componentsType
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
-#' @usage \S4method{componentsType}{lmDME}(object)
-#' @aliases componentsType,lmDME-method
-setMethod(f="componentsType", signature="lmDME", definition=function(object){
+#' @usage \S4method{componentsType}{lmdme}(object)
+#' @aliases componentsType,lmdme-method
+setMethod(f="componentsType", signature="lmdme", definition=function(object){
   return(object@componentsType)
 })
 #'
 #' @exportMethod model
 #' @name model
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
 #' @usage model(object)
 #' @aliases model-methods
 setGeneric(name="model", def=function(object){standardGeneric("model")})
 #'
 #' @name model
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
-#' @usage \S4method{model}{lmDME}(object)
-#' @aliases model,lmDME-method
-setMethod(f="model", signature="lmDME", definition=function(object){
+#' @usage \S4method{model}{lmdme}(object)
+#' @aliases model,lmdme-method
+setMethod(f="model", signature="lmdme", definition=function(object){
   return(object@model)
 })
 #'
 #' @exportMethod design
 #' @name design
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
 #' @usage design(object)
 #' @aliases design-methods
 setGeneric(name="design", def=function(object){standardGeneric("design")})
 #'
 #' @name design
-#' @rdname lmDME-getters
+#' @rdname lmdme-getters
 #' @inheritParams fitted.values
-#' @usage \S4method{design}{lmDME}(object)
-#' @aliases design,lmDME-method
-setMethod(f="design", signature="lmDME", definition=function(object){
+#' @usage \S4method{design}{lmdme}(object)
+#' @aliases design,lmdme-method
+setMethod(f="design", signature="lmdme", definition=function(object){
   return(object@design)
 })
 

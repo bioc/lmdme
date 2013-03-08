@@ -1,87 +1,87 @@
 \docType{methods}
 \name{fitted.values}
 \alias{F.p.values}
-\alias{F.p.values,lmDME-method}
+\alias{F.p.values,lmdme-method}
 \alias{F.p.values-methods}
 \alias{coef}
-\alias{coef,lmDME-method}
+\alias{coef,lmdme-method}
 \alias{coefficients}
-\alias{coefficients,lmDME-method}
+\alias{coefficients,lmdme-method}
 \alias{components}
-\alias{components,lmDME-method}
+\alias{components,lmdme-method}
 \alias{components-methods}
 \alias{componentsType}
-\alias{componentsType,lmDME-method}
+\alias{componentsType,lmdme-method}
 \alias{componentsType-methods}
 \alias{design}
-\alias{design,lmDME-method}
+\alias{design,lmdme-method}
 \alias{design-methods}
 \alias{fitted}
-\alias{fitted,lmDME-method}
+\alias{fitted,lmdme-method}
 \alias{fitted.values}
-\alias{fitted.values,lmDME-method}
+\alias{fitted.values,lmdme-method}
 \alias{model}
-\alias{model,lmDME-method}
+\alias{model,lmdme-method}
 \alias{model-methods}
 \alias{modelDecomposition}
-\alias{modelDecomposition,lmDME-method}
+\alias{modelDecomposition,lmdme-method}
 \alias{modelDecomposition-methods}
 \alias{p.values}
-\alias{p.values,lmDME-method}
+\alias{p.values,lmdme-method}
 \alias{p.values-methods}
 \alias{resid}
-\alias{resid,lmDME-method}
+\alias{resid,lmdme-method}
 \alias{residuals}
-\alias{residuals,lmDME-method}
-\title{Getters for lmDME object}
+\alias{residuals,lmdme-method}
+\title{Getters for lmdme object}
 \usage{
-  \S4method{fitted.values}{lmDME}(object, term=NULL,
+  \S4method{fitted.values}{lmdme}(object, term=NULL,
   drop=TRUE)
 
-  \S4method{fitted}{lmDME}(object, term=NULL, drop=TRUE)
+  \S4method{fitted}{lmdme}(object, term=NULL, drop=TRUE)
 
-  \S4method{coef}{lmDME}(object, term=NULL, drop=TRUE)
+  \S4method{coef}{lmdme}(object, term=NULL, drop=TRUE)
 
-  \S4method{coefficients}{lmDME}(object, term=NULL,
+  \S4method{coefficients}{lmdme}(object, term=NULL,
   drop=TRUE)
 
-  \S4method{resid}{lmDME}(object, term=NULL, drop=TRUE)
+  \S4method{resid}{lmdme}(object, term=NULL, drop=TRUE)
 
-  \S4method{residuals}{lmDME}(object, term=NULL, drop=TRUE)
+  \S4method{residuals}{lmdme}(object, term=NULL, drop=TRUE)
 
   F.p.values(object, term=NULL, drop=TRUE)
 
-  \S4method{F.p.values}{lmDME}(object, term=NULL,
+  \S4method{F.p.values}{lmdme}(object, term=NULL,
   drop=TRUE)
 
   p.values(object, term=NULL, drop=TRUE)
 
-  \S4method{p.values}{lmDME}(object, term=NULL, drop=TRUE)
+  \S4method{p.values}{lmdme}(object, term=NULL, drop=TRUE)
 
   modelDecomposition(object, term=NULL, drop=TRUE)
 
-  \S4method{modelDecomposition}{lmDME}(object, term=NULL,
+  \S4method{modelDecomposition}{lmdme}(object, term=NULL,
   drop=TRUE)
 
   components(object, term=NULL, drop=TRUE)
 
-  \S4method{components}{lmDME}(object, term=NULL,
+  \S4method{components}{lmdme}(object, term=NULL,
   drop=TRUE)
 
   componentsType(object)
 
-  \S4method{componentsType}{lmDME}(object)
+  \S4method{componentsType}{lmdme}(object)
 
   model(object)
 
-  \S4method{model}{lmDME}(object)
+  \S4method{model}{lmdme}(object)
 
   design(object)
 
-  \S4method{design}{lmDME}(object)
+  \S4method{design}{lmdme}(object)
 }
 \arguments{
-  \item{object}{lmDME class object.}
+  \item{object}{lmdme class object.}
 
   \item{term}{character with the corresponding term/s to
   return. Default value is NULL in order to return every
@@ -106,7 +106,7 @@
   calculation.}
 }
 \description{
-  Obtain lmDME slot information, according to the given
+  Obtain lmdme slot information, according to the given
   function call (see Values). If term parameter is not
   specified, it will return all the available terms.
   Otherwise, just the one specified.

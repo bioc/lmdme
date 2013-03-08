@@ -3,7 +3,7 @@
 \alias{permutation}
 \alias{permutation,formula,data.frame,data.frame-method}
 \alias{permutation-methods}
-\title{\code{permutation} of the specified lmDME object}
+\title{\code{permutation} of the specified lmdme object}
 \usage{
   \S4method{permutation}{formula,data.frame,data.frame}(model,data,design,Bayes=FALSE,verbose=FALSE,NPermutations=100,nCpus=1,...)
 }
@@ -36,11 +36,11 @@
   function.}
 }
 \value{
-  \item{list}{contains the original lmDME object plus the
+  \item{list}{contains the original lmdme object plus the
   required amount of permuted versions.}
 }
 \description{
-  Produces de specified lmDME plus the required permuted
+  Produces de specified lmdme plus the required permuted
   objects (sampling the columns), using the same parameters
   to fit the additional models.
 }

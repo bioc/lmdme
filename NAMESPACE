@@ -1,4 +1,4 @@
-exportClasses(lmDME)
+exportClasses(lmdme)
 exportMethods(F.p.values)
 exportMethods(biplot)
 exportMethods(coef)

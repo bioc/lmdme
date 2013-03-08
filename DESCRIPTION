@@ -1,8 +1,8 @@
 Package: lmdme
 Type: Package
 Title: Linear Model decomposition for Designed Multivariate Experiments
-Version: 1.1.2
-Date: 2013-03-06
+Version: 1.1.3
+Date: 2013-03-08
 Author: Cristobal Fresno and Elmer A. Fernandez
 Maintainer: Cristobal Fresno <cristobalfresno@gmail.com>
 Description: linear ANOVA decomposition of Multivariate 
@@ -20,7 +20,7 @@ URL: http://www.bdmg.com.ar/?page_id=38
 Imports: stats
 Depends: R (>= 2.14.1), methods, limma, pls, stemHypoxia
 Enhances: parallel
-Collate: 'lmDME-Class.R' 'lmDME-lmdme.R' 'lmDME-getters.R'
-        'lmDME-printshow.R' 'lmDME-padjust.R' 'lmDME-leverage.R'
-        'lmDME-permutation.R' 'lmDME-decomposition.R' 'lmDME-biplot.R'
-        'lmDME-screeplot.R' 'lmDME-loadingplot.R'
+Collate: 'lmdme-Class.R' 'lmdme-lmdme.R' 'lmdme-getters.R'
+        'lmdme-printshow.R' 'lmdme-padjust.R' 'lmdme-leverage.R'
+        'lmdme-permutation.R' 'lmdme-decomposition.R' 'lmdme-biplot.R'
+        'lmdme-screeplot.R' 'lmdme-loadingplot.R'

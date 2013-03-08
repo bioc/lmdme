@@ -2,7 +2,8 @@
 #'
 #' Given a set of p-values, returns p-values adjusted using one of several methods.
 #' 
-#' @param p numeric vector of p-values as in stats::p.adjust or lmDME class object.
+#' @param p numeric vector of p-values as in stats::p.adjust or lmdme class
+#' object.
 #' @param method correction method available in \code{\link{p.adjust.methods}}.
 #' @param term character with the corresponding term to return.
 #' @param ... other arguments.
@@ -11,7 +12,7 @@
 #'
 #' @return according to the call one of the following objects can be returned
 #' \item{numeric}{vector of adjusted p-values.}
-#' \item{matrix}{for lmDME object If term!=NULL, the corresponding character is
+#' \item{matrix}{for lmdme object If term!=NULL, the corresponding character is
 #'  looked up within list of p.values returning the associated matrix of G
 #'  rows(individuals) x k columns(levels of the corresponding model term) with
 #'  the adjusted p-values.}
@@ -47,24 +48,24 @@
 #' @exportMethod p.adjust
 #' @docType methods
 #' @name p.adjust
-#' @rdname lmDME-padjust
+#' @rdname lmdme-padjust
 #' @aliases p.adjust-methods
 setGeneric(name="p.adjust", def=function(p, ...){standardGeneric("p.adjust")})
 #'
 #' @exportMethod p.adjust
 #' @name p.adjust
-#' @rdname lmDME-padjust
+#' @rdname lmdme-padjust
 #' @inheritParams p.adjust
 #' @aliases p.adjust,ANY-method
 setMethod(f="p.adjust", signature="ANY", definition=stats::p.adjust)
 #'
 #' @exportMethod p.adjust
-#' @name lmDME-padjust
-#' @rdname lmDME-padjust
+#' @name lmdme-padjust
+#' @rdname lmdme-padjust
 #' @inheritParams p.adjust
-#' @usage \S4method{p.adjust}{lmDME}(p, term=NULL, method=p.adjust.methods, drop=TRUE)
-#' @aliases p.adjust,lmDME-method
-setMethod(f="p.adjust", signature="lmDME", definition=function(p, term=NULL,
+#' @usage \S4method{p.adjust}{lmdme}(p, term=NULL, method=p.adjust.methods, drop=TRUE)
+#' @aliases p.adjust,lmdme-method
+setMethod(f="p.adjust", signature="lmdme", definition=function(p, term=NULL,
   method=p.adjust.methods, drop=TRUE){
   out<-lapply(p.values(p, term, drop=FALSE), function(x){
     apply(x, MARGIN=2, FUN=p.adjust, method=method)

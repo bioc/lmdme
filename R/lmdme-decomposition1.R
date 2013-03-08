@@ -1,8 +1,8 @@
-#' \code{decomposition} of lmDME object
+#' \code{decomposition} of lmdme object
 #' 
 #' This function calculates the decomposition of variance or covariance
 #' structure using Principal Components Analysis (PCA) or Partial Least
-#' Squared Regression (PLSR), over ANOVA decomposed lmDME object. In this
+#' Squared Regression (PLSR), over ANOVA decomposed lmdme object. In this
 #' context, in a two factor experimental design with interaction, the linear
 #' model of the i-th observation (gene) can be written: 
 #' \cr \eqn{X=\mu+X_{A}+X_{B}+X_{AB}+\epsilon} \cr 
@@ -26,7 +26,7 @@
 #' called \emph{ASCA}. The same decomposition schema can also be used with
 #' PLSR.
 #'
-#' @param object lmDME class object.
+#' @param object lmdme class object.
 #' @param decomposition character to indicate the decomposition to be carry out,
 #'  i.e., \emph{"pca"} or \emph{"plsr"}. Default value is "pca".
 #' @param term character specifying the model term to perform the decomposition
@@ -50,7 +50,7 @@
 #' @param ... additional parameters for \code{\link{prcomp}} or
 #'  \code{\link{plsr}} functions, according to decomposition call.
 #'
-#' @return Internal update of the "components" slot of the lmDME object, which
+#' @return Internal update of the "components" slot of the lmdme object, which
 #'  is a list of \code{\link{prcomp}} or a list of mvr (\code{\link{plsr}})
 #'  objects using the given term parameter. If missing(term), the length of the
 #'  list equal the number of decomposed models minus the Intercept term for
@@ -122,7 +122,7 @@
 #' @exportMethod decomposition
 #' @docType methods
 #' @name decomposition
-#' @rdname lmDME-decomposition
+#' @rdname lmdme-decomposition
 #' @aliases decomposition-methods
 setGeneric(name="decomposition", def = function(object,
   decomposition=c("pca","plsr"), term=NULL,
@@ -132,10 +132,10 @@ setGeneric(name="decomposition", def = function(object,
 })
 #'
 #' @name decomposition
-#' @rdname lmDME-decomposition
+#' @rdname lmdme-decomposition
 #' @inheritParams decomposition
-#' @aliases decomposition,lmDME-method
-setMethod(f="decomposition", signature = "lmDME", definition = function(object,
+#' @aliases decomposition,lmdme-method
+setMethod(f="decomposition", signature = "lmdme", definition = function(object,
   decomposition=c("pca","plsr"), term=NULL,
   subset=1:nrow(object@residuals[[1]]), type=c("coefficient", "residual"),
   scale=c("none","row","column"), Omatrix, ...){
@@ -232,7 +232,7 @@ setMethod(f="decomposition", signature = "lmDME", definition = function(object,
     )#from decomposition 
   })#from lapply
 
-  ##Update lmDME object
+  ##Update lmdme object
   object@componentsType<-c(decomposition=decomposition[1],
     type=type[1], scale=scale[1])
   assign(nameObject, object, envir=parent.frame())

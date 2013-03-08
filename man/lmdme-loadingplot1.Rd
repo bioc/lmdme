@@ -1,14 +1,14 @@
 \docType{methods}
 \name{loadingplot}
 \alias{loadingplot}
-\alias{loadingplot,lmDME-method}
-\title{\code{loadingplot} of interaction PCA decomposed lmDME object}
+\alias{loadingplot,lmdme-method}
+\title{\code{loadingplot} of interaction PCA decomposed lmdme object}
 \usage{
-  \S4method{loadingplot}{lmDME}(object, term.x, term.y,
+  \S4method{loadingplot}{lmdme}(object, term.x, term.y,
   pc=1, ord.x, col, ...)
 }
 \arguments{
-  \item{object}{lmDME class object.}
+  \item{object}{lmdme class object.}
 
   \item{term.x,term.y}{character indicating the model
   principal factor for the interaction term (term.x:term.y
@@ -29,12 +29,12 @@
 }
 \value{
   loading plot of the selected interaction (term.x:term.y)
-  components lmDME object's slot, if PCA decomposition was
+  components lmdme object's slot, if PCA decomposition was
   applied.
 }
 \description{
   This function plots the PCA loadings for a given
-  interaction (A:B) lmDME object's components slot, for the
+  interaction (A:B) lmdme object's components slot, for the
   given "pc" component. The user can choose which term (A
   or B) is used for x-axis and y-axis functions (B or A)
   respectively.

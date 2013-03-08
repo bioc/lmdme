@@ -1,9 +1,9 @@
-#' Plot a \code{biplot} of a lmDME object
+#' Plot a \code{biplot} of a lmdme object
 #' 
-#' Plot a biplot over each decomposed "pca" or "plsr" present in lmDME
+#' Plot a biplot over each decomposed "pca" or "plsr" present in lmdme
 #' components object's slot.
 #'
-#' @param x lmDME class object.
+#' @param x lmdme class object.
 #' @param comp a two component vector with the PC components to plot. Default 
 #'  comp=1:2.
 #' @param xlab character for the x-label title for PCA biplots.
@@ -16,7 +16,7 @@
 #' @param ... additional parameters for \code{\link{biplot.prcomp}}(pca) or
 #'  \code{\link{biplot.mvr}}(plsr)
 #'
-#' @return plotted biplot/s of the components slot of the given lmDME object. If
+#' @return plotted biplot/s of the components slot of the given lmdme object. If
 #'  \code{\link{par}}() is called before this function, the biplots can be
 #'  arranged in the same window  
 #'
@@ -82,11 +82,11 @@
 #'
 #' @exportMethod biplot
 #' @docType methods
-#' @usage \S4method{biplot}{lmDME}(x, comp=1:2, xlab=NULL, ylab=NULL, term=NULL, mfcol, ...)
+#' @usage \S4method{biplot}{lmdme}(x, comp=1:2, xlab=NULL, ylab=NULL, term=NULL, mfcol, ...)
 #' @name biplot
-#' @rdname lmDME-biplot
-#' @aliases biplot,lmDME-method
-setMethod(f="biplot", signature="lmDME", definition=function(x, comp=1:2,
+#' @rdname lmdme-biplot
+#' @aliases biplot,lmdme-method
+setMethod(f="biplot", signature="lmdme", definition=function(x, comp=1:2,
   xlab=NULL, ylab=NULL, term=NULL, mfcol, ...){
   ##Check that is at least one biplot available
   component<-components(x, term=term, drop=FALSE)

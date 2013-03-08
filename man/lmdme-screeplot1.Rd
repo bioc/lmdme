@@ -1,15 +1,15 @@
 \docType{methods}
 \name{screeplot}
 \alias{screeplot}
-\alias{screeplot,lmDME-method}
-\title{Plot a \code{screeplot} of a PCA decomposed lmDME object}
+\alias{screeplot,lmdme-method}
+\title{Plot a \code{screeplot} of a PCA decomposed lmdme object}
 \usage{
-  \S4method{screeplot}{lmDME}(x, independent=TRUE,
+  \S4method{screeplot}{lmdme}(x, independent=TRUE,
   col=seq(along=components(x)), npcs, term=NULL, mfcol,
   ...)
 }
 \arguments{
-  \item{x}{lmDME class object.}
+  \item{x}{lmdme class object.}
 
   \item{independent}{logical indicating whether the
   screeplots should be plotted together. Default value is
@@ -40,7 +40,7 @@
 }
 \description{
   Screeplot over each decomposed "pca" model present in
-  lmDME components slot.
+  lmdme components slot.
 }
 \examples{
 {

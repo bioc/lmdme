@@ -3,7 +3,7 @@
 \alias{lmdme}
 \alias{lmdme,formula,ANY,data.frame-method}
 \alias{lmdme-methods}
-\title{High level constructor of lmDME class object}
+\title{High level constructor of lmdme class object}
 \arguments{
   \item{model}{formula object to carry out the
   decomposition.}
@@ -27,7 +27,7 @@
   function.}
 }
 \value{
-  \item{lmDME}{lmDME class object with the corresponding
+  \item{lmdme}{lmdme class object with the corresponding
   completed slots according to the given model}
 }
 \description{

@@ -1,4 +1,4 @@
-#' lmDME S4 class: Linear Model decomposition for Designed Multivariate
+#' lmdme S4 class: Linear Model decomposition for Designed Multivariate
 #' Experiments. 
 #'
 #' Linear Model ANOVA decomposition of Designed Multivariate Experiments based
@@ -55,10 +55,10 @@
 #'  "column") 
 #' }
 #'
-#' @section lmDME-general-functions:
+#' @section lmdme-general-functions:
 #' \describe{
-#'  \item{print, show}{Basic output for lmDME class}
-#'  \item{summary}{Basic statistics for lmDME class} 
+#'  \item{print, show}{Basic output for lmdme class}
+#'  \item{summary}{Basic statistics for lmdme class} 
 #'  \item{design, model, modelDecomposition, residuals and coefficients}{Getters
 #' for their respective slots.} 
 #'  \item{p.values, F.p.values, components and componentsType}{Getters for their
@@ -103,7 +103,7 @@
 #' 
 #' @seealso \code{\link{lmdme}}, \code{\link{decomposition}}, 
 #'  \code{\link{biplot}}, \code{\link{loadingplot}} and additional related
-#'  lmDME class functions.
+#'  lmdme class functions.
 #'
 #' @references 
 #' \enumerate{
@@ -119,10 +119,10 @@
 #'  Intelligent Laboratory Systems, 110:113-122
 #' }
 #'
-#' @name lmDME-class
-#' @rdname lmDME-Class
-#' @exportClass lmDME
-setClass(Class="lmDME",
+#' @name lmdme-class
+#' @rdname lmdme-Class
+#' @exportClass lmdme
+setClass(Class="lmdme",
   representation=representation(
     design="data.frame",
     model="formula",

@@ -1,23 +1,23 @@
 \docType{methods}
 \name{print}
 \alias{print}
-\alias{print,lmDME-method}
+\alias{print,lmdme-method}
 \alias{show}
-\alias{show,lmDME-method}
+\alias{show,lmdme-method}
 \alias{summary}
-\alias{summary,lmDME-method}
-\title{\code{Show}, \code{Print} or \code{Summary} a lmDME object}
+\alias{summary,lmdme-method}
+\title{\code{Show}, \code{Print} or \code{Summary} a lmdme object}
 \usage{
-  \S4method{print}{lmDME}(x, term)
+  \S4method{print}{lmdme}(x, term)
 
-  \S4method{show}{lmDME}(object)
+  \S4method{show}{lmdme}(object)
 
-  \S4method{summary}{lmDME}(object)
+  \S4method{summary}{lmdme}(object)
 }
 \arguments{
-  \item{x}{lmDME class object.}
+  \item{x}{lmdme class object.}
 
-  \item{object}{lmDME class object.}
+  \item{object}{lmdme class object.}
 
   \item{term}{character with the corresponding term to
   return. Default value is NULL to return every decomposed
@@ -26,12 +26,12 @@
 \value{
   according to the call \item{print, show or
   summary:}{console output text with increasing detail of
-  lmDME object.} \item{show or summary}{console output text
-  of the lmDME object, plus a data.frame with model
+  lmdme object.} \item{show or summary}{console output text
+  of the lmdme object, plus a data.frame with model
   decomposition summary data.}
 }
 \description{
-  Generic Show/Print/Summary method for lmDME class output
+  Generic Show/Print/Summary method for lmdme class output
   visualization.
 }
 \examples{

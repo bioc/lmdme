@@ -1,11 +1,11 @@
-#' \code{loadingplot} of interaction PCA decomposed lmDME object
+#' \code{loadingplot} of interaction PCA decomposed lmdme object
 #' 
-#' This function plots the PCA loadings for a given interaction (A:B) lmDME
+#' This function plots the PCA loadings for a given interaction (A:B) lmdme
 #' object's components slot, for the given "pc" component. The user can choose
 #' which term (A or B) is used for x-axis and y-axis functions (B or A)
 #' respectively.
 #'
-#' @param object lmDME class object.
+#' @param object lmdme class object.
 #' @param term.x,term.y character indicating the model principal factor for the
 #'  interaction term (term.x:term.y or term.y:term.x) for the corresponding x or
 #'  y axis.
@@ -17,7 +17,7 @@
 #' @param ... additional parameters for matplot.
 #'
 #' @return loading plot of the selected interaction (term.x:term.y) components
-#'  lmDME object's slot, if PCA decomposition was applied.
+#'  lmdme object's slot, if PCA decomposition was applied.
 #'
 #' @author Cristobal Fresno and Elmer A Fernandez
 #'
@@ -62,11 +62,11 @@
 #' @importFrom pls loadingplot 
 #' @docType methods
 #' @name loadingplot
-#' @rdname lmDME-loadingplot
-#' @usage \S4method{loadingplot}{lmDME}(object, term.x, term.y, pc=1, ord.x, col, ...)
-#' @aliases loadingplot,lmDME-method
+#' @rdname lmdme-loadingplot
+#' @usage \S4method{loadingplot}{lmdme}(object, term.x, term.y, pc=1, ord.x, col, ...)
+#' @aliases loadingplot,lmdme-method
 stopifnot(require(pls))
-setMethod(f="loadingplot",signature="lmDME", definition=function(object, term.x,
+setMethod(f="loadingplot",signature="lmdme", definition=function(object, term.x,
   term.y, pc=1, ord.x, col, ...){
   ##Check for PCA decomposition
   if(length(componentsType(object))==0){

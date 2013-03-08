@@ -1,3 +1,10 @@
+lmdme 1.1.3
+----------------------------------------------------------------
+MAYOR CHANGES
+
+* "lmDME" on class/files/.Rd names changed to "lmdme" in order to match package
+name (Thanks to Editor and two reviewers of Journal of Statistical Software).
+
 lmdme 1.1.2
 ----------------------------------------------------------------
 MINOR CHANGES
