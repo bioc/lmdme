@@ -5,7 +5,7 @@
 \title{Plot a \code{biplot} of a lmdme object}
 \usage{
   \S4method{biplot}{lmdme}(x, comp=1:2, xlab=NULL,
-  ylab=NULL, term=NULL, mfcol, ...)
+  ylab=NULL, term=NULL, mfcol, xlabs, ylabs, which, ...)
 }
 \arguments{
   \item{x}{lmdme class object.}
@@ -27,6 +27,19 @@
   mfcol=c(1,2) will be used if more than one biplot is
   available. Use mfcol==NULL to override par call inside
   biplot function.}
+
+  \item{xlabs,ylabs}{vector of character strings to label
+  the first/second set of points. The default is to use
+  dimname of "x"/"y", or "1:n" if the dimname is NULL for
+  the respectively set of points. If a single character is
+  passed e.g. "o", the same character one is used for all
+  the points.}
+
+  \item{which}{character to indicate the type of biplot to
+  use when plsr decomposition is applied. Default value is
+  "x" (X scores and loadings), "y" for (Y scores and
+  loadings), "scores" (X and Y scores) or "loadings" (X and
+  Y loadings). See \code{\link{biplot.mvr}} for details.}
 
   \item{...}{additional parameters for
   \code{\link{biplot.prcomp}}(pca) or
@@ -68,16 +81,16 @@ decomposition(fit, decomposition="pca",scale="row",subset=id)
 \dontrun{
 ##Do not call par inside
 par(mfrow=c(2,2))
-biplot(fit, xlabs=rep("o", sum(id)), mfcol=NULL)
+biplot(fit, xlabs="o", mfcol=NULL)
 
 ##Just the term of interest
-biplot(fit, xlabs=rep("o", sum(id)), term="time")
+biplot(fit, xlabs="o", term="time")
 
 ##In separate graphics
-biplot(fit, xlabs=rep("o", sum(id)), term=c("time", "oxygen"), mfcol=c(1,1))
+biplot(fit, xlabs="o", term=c("time", "oxygen"), mfcol=c(1,1))
 
 ##All term in the same graphic
-biplot(fit, xlabs=rep("o", sum(id)), mfcol=c(1,3))
+biplot(fit, xlabs="o", mfcol=c(1,3))
 }
 }
 
@@ -94,7 +107,7 @@ biplot(fit, which="x", mfcol=NULL)
 ##Other alternatives to which
 biplot(fit, which="y", mfcol=NULL)
 biplot(fit, which="scores", mfcol=NULL)
-biplot(fit, which="loadings", mfcol=NULL, xlabs=rep("o", sum(id)))
+biplot(fit, which="loadings", mfcol=NULL, xlabs="o")
 }
 }
 \author{

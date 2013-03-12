@@ -104,7 +104,7 @@ id<-F.p.values(fit,term="time:oxygen")<0.001
 sum(id) #The amount of genes for further exploration
 decomposition(fit,decomposition="pca", type="coefficient", 
               term="time:oxygen", subset=id, scale="row")
-biplot(fit,xlabs=rep("o",sum(id)), mfcol=NULL)
+biplot(fit, xlabs="o", mfcol=NULL)
 @
 
 These instructions will perform ASCA and store the results inside the \texttt{fit} object. The user can also visualize the associated \texttt{biplot} (see Figure 1). 
@@ -112,7 +112,7 @@ These instructions will perform ASCA and store the results inside the \texttt{fi
 \begin{figure}[!hbp]
  \begin{center}
 <<ASCA_biplot, fig=TRUE, results=hide, echo=false>>=
-biplot(fit,xlabs=rep("o",sum(id)), mfcol=NULL)
+biplot(fit, xlabs="o", mfcol=NULL)
 @
   \end{center}
   \label{fig:ascabiplot}
@@ -123,18 +123,19 @@ In addition, PLSR can be applied on the same term, against the identity matrix (
 
 <<PLS decomposition, echo=true>>=
 fit.plsr<-fit
-decomposition(fit.plsr,decomposition="plsr", type="coefficient", 
-              term="time:oxygen", subset=id,scale="row")
-biplot(fit.plsr, which = "loadings", xlabs=rep("o",sum(id)), 
-      ylabs=colnames(coefficients(fit.plsr,term="time:oxygen")),
-       var.axes=TRUE, mfcol=NULL)
+decomposition(fit.plsr, decomposition="plsr", type="coefficient", 
+  term="time:oxygen", subset=id, scale="row")
+biplot(fit.plsr, which="loadings", xlabs="o", 
+  ylabs=colnames(coefficients(fit.plsr, term="time:oxygen")),
+  var.axes=TRUE, mfcol=NULL)
 @
 
 \begin{figure}[!hbp]
  \begin{center}
 <<PLS_biplot, fig=TRUE, results=hide, echo=false>>=
-biplot(fit.plsr, which = "loadings", xlabs=rep("o",sum(id)), 
-      ylabs=colnames(coefficients(fit.plsr,term="time:oxygen")),var.axes=TRUE, mfcol=NULL)
+biplot(fit.plsr, which="loadings", xlabs="o", 
+  ylabs=colnames(coefficients(fit.plsr, term="time:oxygen")),
+  var.axes=TRUE, mfcol=NULL)
 @
   \end{center}
   \label{fig:plsbiplot}
@@ -148,7 +149,7 @@ The interaction effect can also be displayed by means of using loadingplot funct
 \begin{figure}[!hbp]
  \begin{center}
 <<Loadingplot, fig=TRUE, results=hide, echo=true>>=
-loadingplot(fit,term.x="time",term.y="oxygen")
+loadingplot(fit, term.x="time", term.y="oxygen")
 @
 \end{center}
   \label{fig:loadignplot}

@@ -13,6 +13,14 @@
 #' @param mfcol numeric vector for par layout. If missing mfcol=c(1,2) will be
 #'  used if more than one biplot is available. Use  mfcol==NULL to override par
 #'  call inside biplot function.
+#' @param xlabs,ylabs vector of character strings to label the first/second set
+#'  of points. The default is to use dimname of "x"/"y", or "1:n" if the dimname
+#'  is NULL for the respectively set of points. If a single character is
+#'  passed e.g. "o", the same character one is used for all the points.
+#' @param which character to indicate the type of biplot to use when plsr
+#'  decomposition is applied. Default value is "x" (X scores and loadings), "y"
+#'  for (Y scores and loadings), "scores" (X and Y scores) or "loadings" (X and
+#'  Y loadings). See \code{\link{biplot.mvr}} for details.
 #' @param ... additional parameters for \code{\link{biplot.prcomp}}(pca) or
 #'  \code{\link{biplot.mvr}}(plsr)
 #'
@@ -51,16 +59,16 @@
 #' \dontrun{
 #' ##Do not call par inside
 #' par(mfrow=c(2,2))
-#' biplot(fit, xlabs=rep("o", sum(id)), mfcol=NULL) 
+#' biplot(fit, xlabs="o", mfcol=NULL) 
 #' 
 #' ##Just the term of interest
-#' biplot(fit, xlabs=rep("o", sum(id)), term="time")
+#' biplot(fit, xlabs="o", term="time")
 #'
 #' ##In separate graphics
-#' biplot(fit, xlabs=rep("o", sum(id)), term=c("time", "oxygen"), mfcol=c(1,1))
+#' biplot(fit, xlabs="o", term=c("time", "oxygen"), mfcol=c(1,1))
 #' 
 #' ##All term in the same graphic
-#' biplot(fit, xlabs=rep("o", sum(id)), mfcol=c(1,3))
+#' biplot(fit, xlabs="o", mfcol=c(1,3))
 #' }
 #' }
 #'
@@ -77,22 +85,27 @@
 #' ##Other alternatives to which
 #' biplot(fit, which="y", mfcol=NULL)
 #' biplot(fit, which="scores", mfcol=NULL)
-#' biplot(fit, which="loadings", mfcol=NULL, xlabs=rep("o", sum(id)))
+#' biplot(fit, which="loadings", mfcol=NULL, xlabs="o")
 #' }
 #'
 #' @exportMethod biplot
 #' @docType methods
-#' @usage \S4method{biplot}{lmdme}(x, comp=1:2, xlab=NULL, ylab=NULL, term=NULL, mfcol, ...)
+#' @usage \S4method{biplot}{lmdme}(x, comp=1:2, xlab=NULL, ylab=NULL, term=NULL, mfcol, xlabs, ylabs, which, ...)
 #' @name biplot
 #' @rdname lmdme-biplot
 #' @aliases biplot,lmdme-method
 setMethod(f="biplot", signature="lmdme", definition=function(x, comp=1:2,
-  xlab=NULL, ylab=NULL, term=NULL, mfcol, ...){
+  xlab=NULL, ylab=NULL, term=NULL, mfcol, xlabs, ylabs, which, ...){
   ##Check that is at least one biplot available
   component<-components(x, term=term, drop=FALSE)
   stopifnot(length(component)!=0)
 
-  ##Check mfcol to adjust par parameter and creat the first biplot
+  ##Check for xlabs, ylabs and which presence
+  if(missing(xlabs)){xlabs<-NA_character_}
+  if(missing(ylabs)){ylabs<-NA_character_}
+  if(missing(which)){which<-"x"}
+   
+  ##Check mfcol to adjust par parameter and create the first biplot
   if(missing(mfcol)){
     if(length(component)==1){
       mfcol<-c(1,1)
@@ -111,6 +124,50 @@ setMethod(f="biplot", signature="lmdme", definition=function(x, comp=1:2,
       par(mfcol=mfcol)
     }
 
+    ##Check xlabs presence
+    xData<-switch(x@componentsType["decomposition"],
+      pca=component[[index]]$x,
+      plsr={switch(which,
+              loadings=component[[index]]$loadings,
+              scores=component[[index]]$scores,
+              y=component[[index]]$Yscores,
+              x=component[[index]]$scores) 
+    }) 
+    if(!all(is.na(xlabs))){
+      if(length(xlabs)==1){
+        xlabs<-rep(xlabs,nrow(xData))
+      }
+    }else{
+      ##Check default behavior 
+      if(is.null(dimnames(xData))){
+        xlabs<-1:nrow(xData)
+      }else{
+        xlabs<-rownames(xData)
+      }
+    }
+
+   ##Check ylabs presence
+   yData<-switch(x@componentsType["decomposition"],
+      pca=component[[index]]$rotation,
+      plsr={switch(which,
+              loadings=component[[index]]$Yloadings,
+              scores=component[[index]]$Yscores,
+              y=component[[index]]$Yloadings,
+              x=component[[index]]$loadings) 
+    }) 
+    if(!all(is.na(ylabs))){
+      if(length(ylabs)==1){
+        ylabs<-rep(ylabs,nrow(yData))
+      }
+    }else{
+      ##Check default behavior 
+      if(is.null(dimnames(yData))){
+        ylabs<-1:nrow(yData)
+      }else{
+        ylabs<-rownames(yData)
+      }
+    }
+    
     ##Selecting the type of biplot
     switch(x@componentsType["decomposition"],
       pca={
@@ -122,12 +179,12 @@ setMethod(f="biplot", signature="lmdme", definition=function(x, comp=1:2,
           paste("PC", comp[1], "(", variance[comp[1]], "%)", sep=""), xlab)
         ylab <- ifelse(is.null(ylab),
           paste("PC", comp[2], "(", variance[comp[2]], "%)", sep=""), ylab)
-
+        
         biplot(component[[index]], main=names(component)[[index]], choices=comp,
-          xlab=xlab, ylab=ylab, ...)
+          xlab=xlab, ylab=ylab, xlabs=xlabs, ylabs=ylabs, ...)
      },
-     plsr=biplot(component[[index]], comps=comp, main=names(component)[[index]],
-      ...)
+     plsr=biplot(component[[index]], comps=comp,main=names(component)[[index]],
+       which=which, xlabs=xlabs, ylabs=ylabs, ...)
    )
     
     ##Just to get the reference
