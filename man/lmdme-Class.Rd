@@ -12,17 +12,16 @@ Experiments.}
   stands for the observed value \item The intercept
   \eqn{\mu} \item A, B and AB are the first, second and
   interaction terms respectively \item The error term
-  \eqn{\epsilon ~ N(0,\sigma^2)}. } The the model is
-  iterative decomposed in a step by step fashion
-  decomposing one term at each time: \enumerate{ \item The
-  intercept is estimated using \eqn{X=\mu+E_1} \item The
-  first factor (A) using \eqn{E_1=A+E_2} \item The second
-  factor (B) using \eqn{E_2=B+E_3} \item The interaction
-  (AB) using \eqn{E_3=AB+E_4}. } For each decomposed step
-  the model, residuals, coefficients, p-values and F-values
-  are stored in a list container, so their corresponding
-  length is equal to the number of model terms + 1 (the
-  intercept).
+  \eqn{\epsilon ~ N(0,\sigma^2)}. } The model is iterative
+  decomposed in a step by step fashion decomposing one term
+  at each time: \enumerate{ \item The intercept is
+  estimated using \eqn{X=\mu+E_1} \item The first factor
+  (A) using \eqn{E_1=A+E_2} \item The second factor (B)
+  using \eqn{E_2=B+E_3} \item The interaction (AB) using
+  \eqn{E_3=AB+E_4}. } For each decomposed step the model,
+  residuals, coefficients, p-values and F-values are stored
+  in a list container, so their corresponding length is
+  equal to the number of model terms + 1 (the intercept).
 }
 \section{Features}{
   \enumerate{ \item Flexible formula type interface, \item
@@ -37,7 +36,7 @@ Experiments.}
   \itemize{ \item design: data.frame with experimental
   design. \item model: formula with the designed model to
   be decomposed. \item modelDecomposition: list with the
-  model formula obtained for each deflation step. \item
+  model formula obtained for each decomposition step. \item
   residuals: list of residual matrices G rows(genes) x N
   columns (arrays-designed measurements). \item
   coefficients: list of coefficient matrices. Each matrix
@@ -63,42 +62,42 @@ Experiments.}
 }
 
 \section{ANOVA-linear-decomposition-functions}{
-  \describe{ \item{lmdme}{Function that produce the
+  \describe{ \item{lmdme}{Function that produces the
   complete ANOVA decomposition based on model specification
-  through formula interface. Technically is a high level
-  wrapper of initialize function.}
-  \item{modelDecomposition}{Getter for decomposed used
+  through a formula interface. Technically it's a high
+  level wrapper of the initialize function.}
+  \item{modelDecomposition}{Getter for the used decomposed
   formula in each step} \item{p.adjust}{Adjust coefficients
-  p-values for Multiple Comparisons Test.} \item{Fpvalues,
-  pvalues}{Getters for corresponding model decomposed
-  associated coefficient statistics in each step, for each
-  observation} \item{residuals, resid, coef, coefficients,
-  fitted.values, fitted}{Getters for corresponding model
-  decomposed in each step} \item{permutation}{Produces de
-  specified lmdme in addition to the required permuted
-  objects (sampling the columns of data), using the same
-  parameters to fit the model.} }
+  p-values for the Multiple Comparison Tests.}
+  \item{Fpvalues, pvalues}{Getters for the corresponding
+  associated decomposed model coefficient statistics in
+  each step, for each observation.} \item{residuals, resid,
+  coef, coefficients, fitted.values, fitted}{Getters for
+  the corresponding decomposed model in each step.}
+  \item{permutation}{Produces the specified lmdme in
+  addition to the required permuted objects (sampling the
+  columns of data), using the same parameters to fit the
+  model.} }
 }
 
 \section{variance-covariance-decomposition-functions}{
   \describe{ \item{decomposition}{Function to perform PCA
-  or PLS over the ANOVA decomposed terms. PCA can be
-  performed over \eqn{E_1}, \eqn{E_2} or \eqn{E_3} and it
-  is referred as ANOVA-PCA (APCA) but, if it is performed
-  over the coefficients it is referred as ANOVA-SCA (ASCA).
-  On the other hand PLSR is based on pls library and if it
-  is performed on coefficients (ASCA like) it uses the
-  identity matrix for output co-variance maximization or
-  can be carried out over the \eqn{E_{1,2 or 3}} (APCA
-  like) using the design matrix as output.}
+  or PLS on the ANOVA decomposed terms. PCA can be
+  performed on \eqn{E_1}, \eqn{E_2} or \eqn{E_3} and it is
+  referred to, as ANOVA-PCA (APCA) but, if it is performed
+  on the coefficients it is referred to, as ANOVA-SCA
+  (ASCA). On the other hand PLSR is based on pls library
+  and if it is performed on coefficients (ASCA like) it
+  uses the identity matrix for output co-variance
+  maximization or can be carried out on the \eqn{E_{1,2 or
+  3}} (APCA like) using the design matrix as the output.}
   \item{components}{Getter for PCA or PLS decomposed
   models.} \item{componentsType}{Getter for componentsType
-  slot.} \item{leverage}{Leverage calculation over PCA
-  (APCA or ASCA) terms.} \item{biplot}{Biplots for PCA or
-  PLSR decomposed terms.} \item{screeplot}{Screeplot over
-  each decomposed PCA decomposed term.}
-  \item{loadingplot}{Loadingplot for PCA interaction
-  terms.} }
+  slot.} \item{leverage}{Leverage calculation on PCA (APCA
+  or ASCA) terms.} \item{biplot}{Biplots for PCA or PLSR
+  decomposed terms.} \item{screeplot}{Screeplot on each PCA
+  decomposed term.} \item{loadingplot}{Loadingplot for PCA
+  interaction terms.} }
 }
 \author{
   Cristobal Fresno and Elmer A Fernandez

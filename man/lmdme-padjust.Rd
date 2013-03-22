@@ -5,7 +5,7 @@
 \alias{p.adjust,ANY-method}
 \alias{p.adjust,lmdme-method}
 \alias{p.adjust-methods}
-\title{\code{p.adjust} of p-values for Multiple Test Comparisons Correction}
+\title{\code{p.adjust} of p-values for Multiple Test Comparison Corrections}
 \usage{
   \S4method{p.adjust}{lmdme}(p, term=NULL,
   method=p.adjust.methods, drop=TRUE)
@@ -22,27 +22,27 @@
 
   \item{...}{other arguments.}
 
-  \item{drop}{should try to drop list structure if
+  \item{drop}{should try to drop the list structure if
   length==1? Default value is TRUE}
 }
 \value{
-  according to the call one of the following objects can be
-  returned \item{numeric}{vector of adjusted p-values.}
+  according to the call, one of the following objects can
+  be returned \item{numeric}{vector of adjusted p-values.}
   \item{matrix}{for lmdme object If term!=NULL, the
-  corresponding character is looked up within list of
-  p.values returning the associated matrix of G
-  rows(individuals) x k columns(levels of the corresponding
+  corresponding character is looked up within the list of
+  p.values returning the associated matrix of G rows
+  (individuals) x k columns (levels of the corresponding
   model term) with the adjusted p-values.}
 }
 \description{
-  Given a set of p-values, returns p-values adjusted using
+  Given a set of p-values, returns adjusted p-values using
   one of several methods.
 }
 \examples{
 {
 data(stemHypoxia)
 
-##Just to make a balance dataset in the Fisher sense (2 samples per
+##Just to make a balanced dataset in the Fisher sense (2 samples per
 ## time*oxygen levels)
 design<-design[design$time \%in\% c(0.5, 1, 5) & design$oxygen \%in\% c(1,5,21),]
 design$time<-as.factor(design$time)
@@ -55,7 +55,7 @@ M<-M[, colnames(M) \%in\% design$samplename]
 ##ANOVA decomposition
 fit<-lmdme(model=~time+oxygen+time:oxygen, data=M, design=design)
 
-##Adjust p-values only over interaction p.values using false discovery rate
+##Adjust p-values only on the interaction p.values using false discovery rate
 ## method
 pInteraction<-p.values(fit, term="time:oxygen")
 FDRInteraction<-p.adjust(fit, term="time:oxygen", method="fdr")

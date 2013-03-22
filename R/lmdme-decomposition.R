@@ -1,59 +1,60 @@
 #' \code{decomposition} of lmdme object
 #' 
 #' This function calculates the decomposition of variance or covariance
-#' structure using Principal Components Analysis (PCA) or Partial Least
-#' Squared Regression (PLSR), over ANOVA decomposed lmdme object. In this
+#' structure using Principal Component Analysis (PCA) or Partial Least
+#' Squared Regression (PLSR), on the ANOVA decomposed lmdme object. In this
 #' context, in a two factor experimental design with interaction, the linear
 #' model of the i-th observation (gene) can be written: 
 #' \cr \eqn{X=\mu+X_{A}+X_{B}+X_{AB}+\epsilon} \cr 
 #' where \itemize{ 
 #'   \item X stands for the observed value.
-#'   \item the intercept the intercept \eqn{\mu}.
+#'   \item the intercept \eqn{\mu}.
 #'   \item \eqn{X_{A}}, \eqn{X_{B}} and \eqn{X_{AB}} are the first, second and
 #'    interaction coefficients respectively.
 #'   \item The error term \eqn{\epsilon ~ N(0,\sigma^2)}.
 #' } 
-#' The the model is iterative decomposed in a step by step fashion decomposing 
-#' one term at each time by calling \code{\link{lmdme}} constructor: 
+#' The model is iteratively decomposed in a step by step fashion, decomposing 
+#' one term each time by calling \code{\link{lmdme}} constructor: 
 #' \enumerate{ 
 #'   \item Step 1: \eqn{X=\mu+E_{1}} 
 #'   \item Step 2: \eqn{E_{1}=X_{A}+E_{2}} 
 #'   \item Step 3: \eqn{E_{2}=X_{B}+E_{3}} 
 #'   \item Step 4: \eqn{E_{3}=X_{AB}+E_{4}}
 #' } 
-#' Then, if we apply PCA over the i-th step using \eqn{E_{i-1}} matrix it is
-#' known as \emph{APCA} but if applied over the coefficients \eqn{X_{i}} it is
+#' Then, if we apply PCA on the i-th step using \eqn{E_{i-1}} matrix it is
+#' known as \emph{APCA} but if applied on the coefficients \eqn{X_{i}} it is
 #' called \emph{ASCA}. The same decomposition schema can also be used with
 #' PLSR.
 #'
 #' @param object lmdme class object.
-#' @param decomposition character to indicate the decomposition to be carry out,
-#'  i.e., \emph{"pca"} or \emph{"plsr"}. Default value is "pca".
+#' @param decomposition character to indicate the decomposition to be carried
+#'  out, i.e., \emph{"pca"} or \emph{"plsr"}. Default value is "pca".
 #' @param term character specifying the model term to perform the decomposition
-#'  (e.g. "time" or "time:concentration" for interaction term). If term is
+#'  (e.g. "time" or "time:concentration" for interaction term). If the term is
 #'  not specified (i.e. missing) it performs the analysis over all the model
 #'  terms. 
 #' @param subset subset of individuals (rows) to be included in the analysis.
 #'  By default all the individuals are included.
-#' @param type character to indicate over which regression matrix perform the
-#'  decomposition ("coefficient" or "residual"). The intercept term is not
-#'  included in the results, as it can be directly analyzed with the original M
-#'  data.frame. Default value is "coefficient" a.k.a. ASCA. Note that "residual"
-#'  performs PCA or PLS over the i-th residual \eqn{E_{i-1}=X_{i}+E_{i}} and not
-#'  the residuals of the i-th model \eqn{E_{i}}.
+#' @param type character to indicate on which regression matrix ("coefficient"
+#'  or "residual") the decomposition will be performed. The intercept term is
+#'  not included in the results, as it can be directly analyzed with the
+#'  original M data.frame. Default value is "coefficient" a.k.a. ASCA. Note
+#'  that "residual" performs PCA or PLS on the i-th residual
+#'  \eqn{E_{i-1}=X_{i}+E_{i}} and not the residuals of the i-th model
+#'  \eqn{E_{i}}.
 #' @param scale character "row", "column" or "none" to indicate if the matrix
 #'  should be scaled by the row, column or not  respectively. Default value
 #'  is "none".
 #' @param Omatrix the output matrix for PLSR only. If the parameter is missing,
-#'  the output matrix  will be an identity matrix for the ASCA, otherwise the
-#'  design matrix corresponding to the specified term for APCA.
+#'  the output matrix  will be an identity matrix for the ASCA. Otherwise, is
+#'  the design matrix corresponding to the specified term for APCA.
 #' @param ... additional parameters for \code{\link{prcomp}} or
-#'  \code{\link{plsr}} functions, according to decomposition call.
+#'  \code{\link{plsr}} functions, according to the decomposition call.
 #'
 #' @return Internal update of the "components" slot of the lmdme object, which
 #'  is a list of \code{\link{prcomp}} or a list of mvr (\code{\link{plsr}})
 #'  objects using the given term parameter. If missing(term), the length of the
-#'  list equal the number of decomposed models minus the Intercept term for
+#'  list equals the number of decomposed models minus the Intercept term for
 #'  coefficients or the length of decomposed models for residual decomposition. 
 #'
 #' @seealso \code{\link{prcomp}}, \code{\link{plsr}}
@@ -76,7 +77,7 @@
 #' {
 #' data(stemHypoxia)
 #' 
-#' ##Just to make a balance dataset in the Fisher sense (2 samples per 
+#' ##Just to make a balanced dataset in the Fisher sense (2 samples per 
 #' ## time*oxygen levels) 
 #' design<-design[design$time %in% c(0.5,1,5) & design$oxygen %in% c(1,5,21), ]
 #' design$time<-as.factor(design$time)
@@ -89,9 +90,9 @@
 #' ##ANOVA decomposition
 #' fit<-lmdme(model=~time+oxygen+time:oxygen, data=M, design=design)
 #' 
-#' ##Just a copy of the same fit object and to perform analysis over those
+#' ##Just a copy of the same fit object and to perform analysis on those
 #' ##subjects/genes where at least one interaction coefficient is statistically
-#' ##different from zero (F-test over the coefficients).
+#' ##different from zero (F-test on the coefficients).
 #' asca<-fit
 #' apca<-fit
 #' id<-F.p.values(fit, term="time:oxygen")<0.001

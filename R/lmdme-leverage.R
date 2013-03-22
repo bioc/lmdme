@@ -1,7 +1,7 @@
 #' \code{leverage} test of lmdme objects
 #' 
 #' This function calculates the leverage test for each individual using the 
-#' Principal Component Analysis (comps function) over the coefficients of the
+#' Principal Component Analysis (comps function) on the coefficients of the
 #' given decomposed model term.
 #'
 #' @param object lmdme class object.
@@ -27,7 +27,7 @@
 #' {
 #' data(stemHypoxia)
 #' 
-#' ##Just to make a balance dataset in the Fisher sense (2 samples per 
+#' ##Just to make a balanced dataset in the Fisher sense (2 samples per 
 #' ## time*oxygen levels)
 #' design<-design[design$time %in% c(0.5, 1, 5) & design$oxygen %in% c(1,5,21),]
 #' design$time<-as.factor(design$time)

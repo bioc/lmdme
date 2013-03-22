@@ -31,9 +31,9 @@
   \item{xlabs,ylabs}{vector of character strings to label
   the first/second set of points. The default is to use
   dimname of "x"/"y", or "1:n" if the dimname is NULL for
-  the respectively set of points. If a single character is
-  passed e.g. "o", the same character one is used for all
-  the points.}
+  the respective set of points. If a single character is
+  passed e.g. "o", the same character is used for all the
+  points.}
 
   \item{which}{character to indicate the type of biplot to
   use when plsr decomposition is applied. Default value is
@@ -46,20 +46,19 @@
   \code{\link{biplot.mvr}}(plsr)}
 }
 \value{
-  plotted biplot/s of the components slot of the given
-  lmdme object. If \code{\link{par}}() is called before
-  this function, the biplots can be arranged in the same
-  window
+  plotted biplot/s of the component/s of the given lmdme
+  object. If \code{\link{par}}() is called before this
+  function, the biplots can be arranged in the same window
 }
 \description{
   Plot a biplot over each decomposed "pca" or "plsr"
-  present in lmdme components object's slot.
+  present in lmdme component object's slot.
 }
 \examples{
 {
 data(stemHypoxia)
 
-##Just to make a balance dataset in the Fisher sense (2 samples per
+##Just to make a balanced dataset in the Fisher sense (2 samples per
 ## time*oxygen levels)
 design<-design[design$time \%in\% c(0.5,1,5) & design$oxygen \%in\% c(1,5,21), ]
 design$time<-as.factor(design$time)
@@ -74,12 +73,12 @@ fit<-lmdme(model=~time+oxygen+time:oxygen, data=M, design=design)
 
 ##ASCA for all the available terms, over those subjects/genes where at least
 ##one interaction coefficient is statistically different from zero (F-test
-##over the coefficients).
+##on coefficients).
 id<-F.p.values(fit, term="time:oxygen")<0.001
 decomposition(fit, decomposition="pca",scale="row",subset=id)
 
 \dontrun{
-##Do not call par inside
+##Does not call par inside
 par(mfrow=c(2,2))
 biplot(fit, xlabs="o", mfcol=NULL)
 
@@ -89,12 +88,12 @@ biplot(fit, xlabs="o", term="time")
 ##In separate graphics
 biplot(fit, xlabs="o", term=c("time", "oxygen"), mfcol=c(1,1))
 
-##All term in the same graphic
+##All terms in the same graphic
 biplot(fit, xlabs="o", mfcol=c(1,3))
 }
 }
 
-##Now using plsr over interaction coefficients
+##Now using plsr on interaction coefficients
 decomposition(fit, decomposition="plsr", term="time:oxygen", scale="row",
 subset=id)
 

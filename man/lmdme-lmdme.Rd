@@ -13,7 +13,7 @@
 
   \item{design}{data.frame with the design of the
   experiment, (rows) samples/conditions as in data columns
-  and as many columns to indicate the factors presents in
+  and as many columns to indicate the factors present in
   each sample.}
 
   \item{Bayes}{Should limma estimate empirical Bayes
@@ -40,15 +40,15 @@
   stands for the observed value \item the intercept
   \eqn{\mu} \item A, B and AB are the first, second and
   interaction terms respectively \item The error term
-  \eqn{\epsilon ~ N(0,\sigma^2)}. } The the model is
-  iterative decomposed in a step by step fashion
-  decomposing one term at each time: \enumerate{ \item The
+  \eqn{\epsilon ~ N(0,\sigma^2)}. } The model is
+  iteratively decomposed in a step by step fashion
+  decomposing one term each time: \enumerate{ \item The
   intercept is estimated using \eqn{X=\mu+E_1} \item The
   first factor (A) using \eqn{E_1=A+E_2} \item The second
   factor (B) using \eqn{E_2=B+E_3} \item The interaction
   (AB) using \eqn{E_3=AB+E_4}. } For each decomposed step
   the model, residuals, coefficients, p-values and F-value
-  are stored in a list container, s their corresponding
+  are stored in a list container, so their corresponding
   length is equal to the number of model terms + 1 (the
   intercept).
 }
@@ -61,7 +61,7 @@
 {
 data(stemHypoxia)
 
-##Just to make a balance dataset in the Fisher sense (2 samples per
+##Just to make a balanced dataset in the Fisher sense (2 samples per
 ## time*oxygen levels)
 design<-design[design$time \%in\% c(0.5,1,5) & design$oxygen \%in\% c(1,5,21), ]
 design$time<-as.factor(design$time)
@@ -69,10 +69,10 @@ design$oxygen<-as.factor(design$oxygen)
 rownames(M)<-M[, 1]
 
 #Keeping appropriate samples only
-M <- M[, colnames(M) \%in\% design$samplename]
+M<-M[, colnames(M) \%in\% design$samplename]
 
 ##ANOVA decomposition
-fit <- lmdme(model=~time+oxygen+time:oxygen, data=M, design=design)
+fit<-lmdme(model=~time+oxygen+time:oxygen, data=M, design=design)
 }
 }
 \author{

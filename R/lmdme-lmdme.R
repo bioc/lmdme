@@ -12,8 +12,8 @@
 #'  \item A, B and AB are the first, second and interaction terms respectively
 #'  \item The error term \eqn{\epsilon ~ N(0,\sigma^2)}.
 #' } 
-#' The the model is iterative decomposed in a step by step fashion decomposing
-#' one term at each time: 
+#' The model is iteratively decomposed in a step by step fashion decomposing
+#' one term each time: 
 #' \enumerate{ 
 #'  \item The intercept is estimated using \eqn{X=\mu+E_1} 
 #'  \item The first factor (A) using \eqn{E_1=A+E_2} 
@@ -21,7 +21,7 @@
 #'  \item The interaction (AB) using \eqn{E_3=AB+E_4}.
 #' } 
 #' For each decomposed step the model, residuals, coefficients, p-values and
-#' F-value are stored in a list container, s their corresponding length is
+#' F-value are stored in a list container, so their corresponding length is
 #' equal to the number of model terms + 1 (the intercept). 
 #' 
 #' @param model formula object to carry out the decomposition.
@@ -29,7 +29,7 @@
 #'  samples/conditions (per columns).
 #' @param design data.frame with the design of the experiment, (rows) 
 #'  samples/conditions as in data columns and as many columns to indicate the
-#'  factors presents in each sample.
+#'  factors present in each sample.
 #' @param Bayes Should limma estimate empirical Bayes statistics, i. e., 
 #'  moderated t-statistics? Default value is FALSE.
 #' @param verbose Should the process progress be printed? Default value is
@@ -60,7 +60,7 @@
 #' {
 #' data(stemHypoxia)
 #' 
-#' ##Just to make a balance dataset in the Fisher sense (2 samples per 
+#' ##Just to make a balanced dataset in the Fisher sense (2 samples per 
 #' ## time*oxygen levels) 
 #' design<-design[design$time %in% c(0.5,1,5) & design$oxygen %in% c(1,5,21), ]
 #' design$time<-as.factor(design$time)
@@ -68,10 +68,10 @@
 #' rownames(M)<-M[, 1]
 #' 
 #' #Keeping appropriate samples only
-#' M <- M[, colnames(M) %in% design$samplename] 
+#' M<-M[, colnames(M) %in% design$samplename] 
 #' 
 #' ##ANOVA decomposition
-#' fit <- lmdme(model=~time+oxygen+time:oxygen, data=M, design=design)
+#' fit<-lmdme(model=~time+oxygen+time:oxygen, data=M, design=design)
 #' }
 #'
 #' @exportMethod lmdme

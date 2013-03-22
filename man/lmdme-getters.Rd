@@ -92,22 +92,22 @@
 }
 \value{
   according to the call one of the following objects can be
-  returned \item{design}{used experiment design
-  data.frame.} \item{model}{used decompose formula.}
+  returned \item{design}{experiment design data.frame
+  used.} \item{model}{decomposed formula used.}
   \item{modelDecomposition}{list of decomposed model
   formulas.} \item{residuals, resid, coef, coefficients,
   fitted, fitted.values, p.values or F.p.values}{list of
   appropriate slot where each item is a matrix that will
-  have G rows (individuals) x k columns(levels of the
+  have G rows (individuals) x k columns (levels of the
   corresponding model term).} \item{components}{list with
-  corresponding PCA or PLSR term according to decomposition
-  function call.} \item{componentsType}{character name
-  vector with the information of the components
-  calculation.}
+  corresponding PCA or PLSR terms according to the
+  decomposition function call.}
+  \item{componentsType}{character name vector with the
+  information of the component calculations.}
 }
 \description{
-  Obtain lmdme slot information, according to the given
-  function call (see Values). If term parameter is not
+  To obtain lmdme slot information, according to the given
+  function call (see Values). If a term parameter is not
   specified, it will return all the available terms.
   Otherwise, just the one specified.
 }
@@ -115,7 +115,7 @@
 {
 data(stemHypoxia)
 
-##Just to make a balance dataset in the Fisher sense (2 samples per
+##Just to make a balanced dataset in the Fisher sense (2 samples per
 ## time*oxygen levels)
 design<-design[design$time \%in\% c(0.5, 1, 5) & design$oxygen \%in\% c(1,5,21),]
 design$time<-as.factor(design$time)
@@ -137,13 +137,13 @@ fit.design<-design(fit)
 fit.modelDecomposition<-modelDecomposition(fit)
 
 ##Getting the specific "time" term coefficients, p-values or F-values.
-## Omit "term" parameter to get available data for all terms.
+## Omit "term" parameter for all available terms.
 timeCoef<-coef(fit,term="time")
 fit.p.values<-p.values(fit,term="time")
 fit.f.values<-F.p.values(fit,term="time")
 
 ##Getting the residuals or fitted values, for the interaction "time:oxygen"
-## term. Omit "term" parameter to get available data for all terms.
+## term. Omit "term" parameter for all available terms.
 interactionResid<-resid(fit, term="time:oxygen")
 interactionFit<-fitted(fit, term="time:oxygen")
 }

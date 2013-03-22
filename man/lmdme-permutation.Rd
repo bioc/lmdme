@@ -16,11 +16,11 @@
 
   \item{design}{data.frame with the design of the
   experiment, (rows) samples/conditions as in data columns
-  and as many columns to indicate the factors presents in
+  and as many columns to indicate the factors present in
   each sample.}
 
   \item{Bayes}{Should limma estimate empirical Bayes
-  statistics, i. e., moderated t-statistics? Default value
+  statistics, i.e., moderated t-statistics? Default value
   is FALSE.}
 
   \item{verbose}{Should the process progress be printed?
@@ -32,15 +32,15 @@
   \item{nCpus}{number of cores to be used. Default value is
   1, i.e. sequential calculation.}
 
-  \item{...}{Additional parameters for \code{\link{lmFit}}
-  function.}
+  \item{...}{Additional parameters for the
+  \code{\link{lmFit}} function.}
 }
 \value{
   \item{list}{contains the original lmdme object plus the
   required amount of permuted versions.}
 }
 \description{
-  Produces de specified lmdme plus the required permuted
+  Produces the specified lmdme plus the required permuted
   objects (sampling the columns), using the same parameters
   to fit the additional models.
 }
@@ -48,7 +48,7 @@
 {
 data(stemHypoxia)
 
-##Just to make a balance dataset in the Fisher sense (2 samples per
+##Just to make a balanced dataset in the Fisher sense (2 samples per
 ## time*oxygen levels)
 design<-design[design$time \%in\% c(0.5, 1, 5) & design$oxygen \%in\% c(1,5,21),]
 design$time<-as.factor(design$time)
@@ -58,8 +58,9 @@ rownames(M)<-M[, 1]
 ##Keeping appropriate samples only
 M<-M[, colnames(M) \%in\% design$samplename]
 
-##Just to test if it works. On real scenario use NPermutations >= 100 if the
-## conditions (columns) of M allows it. Verbose parameter is FALSE by default
+##Just to test if it works. In a real scenario, use NPermutations >= 100 if
+##the conditions (columns) of M allow it. Verbose parameter is FALSE by
+##default
 permuted<-permutation(model=~time*oxygen, data=M, design=design,
 NPermutations=2, nCpus=3)
 }

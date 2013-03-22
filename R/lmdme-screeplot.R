@@ -1,6 +1,6 @@
 #' Plot a \code{screeplot} of a PCA decomposed lmdme object
 #' 
-#' Screeplot over each decomposed "pca" model present in lmdme components slot.
+#' Screeplot on each decomposed "pca" model present in lmdme components slot.
 #'
 #' @param x lmdme class object.
 #' @param independent logical indicating whether the screeplots should be
@@ -11,7 +11,7 @@
 #'  present components are plotted.
 #' @param term character with the corresponding term/s for biploting. Default
 #'  value is NULL in order to obtain every available biplot/s.
-#' @param mfcol numeric vector for par layout. If missing mfcol=c(1,2) will be
+#' @param mfcol numeric vector for par layout. If missing, mfcol=c(1,2) will be
 #'  used if more than one biplot is available. Use  mfcol==NULL to override par
 #'  call inside biplot function.
 #' @param ... additional parameters for screeplot or plot/lines according to
@@ -28,7 +28,7 @@
 #' {
 #' data(stemHypoxia)
 #' 
-#' ##Just to make a balance dataset in the Fisher sense (2 samples per 
+#' ##Just to make a balanced dataset in the Fisher sense (2 samples per 
 #' ## time*oxygen levels) 
 #' design<-design[design$time %in% c(0.5,1,5) & design$oxygen %in% c(1,5,21), ]
 #' design$time <-as.factor(design$time)
@@ -41,16 +41,16 @@
 #' ##ANOVA decomposition
 #' fit<-lmdme(model=~time+oxygen+time:oxygen, data=M, design=design)
 #'
-#' ##ASCA for all the available terms, over those subjects/genes where at least
+#' ##ASCA for all the available terms, on those subjects/genes where at least
 #' ##one interaction coefficient is statistically different from zero (F-test
-#' ##over the coefficients).
+#' ##on the coefficients).
 #' id<-F.p.values(fit,term="time:oxygen")<0.001
 #' decomposition(fit, decomposition="pca", scale="row", subset=id) 
 #'
 #' \dontrun{
 #' par(mfrow=c(2,2))
 #'
-#' ##Do not call par inside
+#' ##Does not call par inside
 #' screeplot(fit,mfcol=NULL)
 #'
 #' ##Just the term of interest

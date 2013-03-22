@@ -21,7 +21,7 @@
 
   \item{term}{character with the corresponding term to
   return. Default value is NULL to return every decomposed
-  term (if more than one available).}
+  term (if more than one is available).}
 }
 \value{
   according to the call \item{print, show or
@@ -38,7 +38,7 @@
 {
 data(stemHypoxia)
 
-##Just to make a balance dataset in the Fisher sense (2 samples per
+##Just to make a balanced dataset in the Fisher sense (2 samples per
 ## time*oxygen levels)
 design<-design[design$time \%in\% c(0.5, 1, 5) & design$oxygen \%in\% c(1,5,21),]
 design$time<-as.factor(design$time)

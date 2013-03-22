@@ -1,6 +1,6 @@
 #' \code{permutation} of the specified lmdme object
 #'
-#' Produces de specified lmdme plus the required permuted objects (sampling the
+#' Produces the specified lmdme plus the required permuted objects (sampling the
 #' columns), using the same parameters to fit the additional models.
 #' 
 #' @param model formula object to carry out the decomposition.
@@ -8,8 +8,8 @@
 #' (columns)
 #' @param design data.frame with the design of the experiment, (rows) 
 #'  samples/conditions as in data columns and as many columns to indicate the
-#'  factors presents in each sample.
-#' @param Bayes Should limma estimate empirical Bayes statistics, i. e., 
+#'  factors present in each sample.
+#' @param Bayes Should limma estimate empirical Bayes statistics, i.e., 
 #'  moderated t-statistics? Default value is FALSE.
 #' @param verbose Should the process progress be printed? Default value is
 #' FALSE.
@@ -17,7 +17,7 @@
 #'  is 100.
 #' @param nCpus number of cores to be used. Default value is 1, i.e. sequential
 #'  calculation.
-#' @param ... Additional parameters for \code{\link{lmFit}} function.
+#' @param ... Additional parameters for the \code{\link{lmFit}} function.
 #'
 #' @return 
 #'  \item{list}{contains the original lmdme object plus the required amount 
@@ -31,7 +31,7 @@
 #' {
 #' data(stemHypoxia)
 #' 
-#' ##Just to make a balance dataset in the Fisher sense (2 samples per 
+#' ##Just to make a balanced dataset in the Fisher sense (2 samples per 
 #' ## time*oxygen levels)
 #' design<-design[design$time %in% c(0.5, 1, 5) & design$oxygen %in% c(1,5,21),]
 #' design$time<-as.factor(design$time)
@@ -41,8 +41,9 @@
 #' ##Keeping appropriate samples only
 #' M<-M[, colnames(M) %in% design$samplename] 
 #' 
-#' ##Just to test if it works. On real scenario use NPermutations >= 100 if the
-#' ## conditions (columns) of M allows it. Verbose parameter is FALSE by default
+#' ##Just to test if it works. In a real scenario, use NPermutations >= 100 if
+#' ##the conditions (columns) of M allow it. Verbose parameter is FALSE by
+#' ##default
 #' permuted<-permutation(model=~time*oxygen, data=M, design=design,
 #' NPermutations=2, nCpus=3)
 #' }

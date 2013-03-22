@@ -13,11 +13,11 @@
 #'  plotted on the y-axis. Default value is 1.
 #' @param col which color to use for each level present in term.y. 
 #' @param ord.x numeric indicating the term.x levels order, for plotting
-#'  purposes. If missing the levels order is used.
+#'  purposes. If missing, the levels order is used.
 #' @param ... additional parameters for matplot.
 #'
-#' @return loading plot of the selected interaction (term.x:term.y) components
-#'  lmdme object's slot, if PCA decomposition was applied.
+#' @return loading plot of the selected interaction (term.x:term.y) 
+#'  lmdme object's components slot, if PCA decomposition was applied.
 #'
 #' @author Cristobal Fresno and Elmer A Fernandez
 #'
@@ -25,7 +25,7 @@
 #' {
 #' data(stemHypoxia)
 #' 
-#' ##Just to make a balance dataset in the Fisher sense (2 samples per 
+#' ##Just to make a balanced dataset in the Fisher sense (2 samples per 
 #' ## time*oxygen levels) 
 #' design<-design[design$time %in% c(0.5,1,5) & design$oxygen %in% c(1,5,21), ]
 #' design$time<-as.factor(design$time)
@@ -38,9 +38,9 @@
 #' ##ANOVA decomposition
 #' fit<-lmdme(model=~time+oxygen+time:oxygen, data=M, design=design)
 #' 
-#' ##ASCA for all the available terms, over those subjects/genes where at least
+#' ##ASCA for all the available terms, on those subjects/genes where at least
 #' ##one interaction coefficient is statistically different from zero (F-test
-#' ##over the coefficients).
+#' ##on the coefficients).
 #' id<-F.p.values(fit, term="time:oxygen")<0.001
 #' decomposition(fit, decomposition="pca", scale="row", subset=id) 
 #'
