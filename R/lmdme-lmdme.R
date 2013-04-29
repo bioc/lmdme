@@ -124,6 +124,8 @@ setMethod(f="lmdme", signature=signature(model="formula", data="ANY",
     ##Fitting the model
     mm<-model.matrix(object=as.formula(terminos[term]), data=design)
     fit<-lmFit(object=as.matrix(data), design=mm, ...)
+    fit$coefficients<-as.matrix(fit$coefficients) ##FIX for NAs
+
     if(Bayes){
       fit<-eBayes(fit)
     }else{
