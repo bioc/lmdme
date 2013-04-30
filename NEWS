@@ -1,3 +1,15 @@
+lmdme 1.2.1
+----------------------------------------------------------------
+BUGS FIXED
+
+* NA manipulation of lmFit for coefficient is now contemplated
+
+lmdme 1.2.0
+----------------------------------------------------------------
+MINOR CHANGES
+
+* bump y of x.y.z version number for BioC 2.12 release
+
 lmdme 1.1.5
 ----------------------------------------------------------------
 DOCUMENTATION
