@@ -1,0 +1,32 @@
+citHeader("To cite package 'lmdme' in publications use the article and manual entry:")
+     
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
+vers <- paste("R package version", meta$Version)
+
+citEntry(entry = "Article",
+        title = "lmdme: Linear Model decomposition for Designed Multivariate Experiments",
+        author = personList(as.person("Cristobal Fresno"),
+                            as.person("Monica G. Balzarini"),
+                            as.person("Elmer A Fernandez")),
+        year = "2013, in press",   
+        journal = "Journal of Statistical Software",
+        textVersion =
+        paste0("Cristobal Fresno and Elmer A. Fernandez (",
+                year, ", in press). lmdme: Linear Model decomposition for Designed Multivariate Experiments. ",
+                "Journal of Statistical Software.")
+)
+
+citEntry(entry = "Manual",
+  title = "lmdme: Linear Model decomposition for Designed Multivariate Experiments",
+  author = personList(as.person("Cristobal Fresno"),                    
+                      as.person("Elmer A Fernandez")),
+  year = year,
+  note = vers,
+
+  url = "http://www.bdmg.com.ar/?page_id=38",
+  textVersion =
+  paste0("Cristobal Fresno and Elmer A. Fernandez (",
+          year, "). lmdme: Linear Model decomposition for Designed Multivariate Experiments. ",
+          vers, ". http://www.bdmg.com.ar/?page_id=38"),
+  header = "To cite package 'lmdme' in publications use the article and manual entry:"
+)

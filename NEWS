@@ -1,3 +1,30 @@
+lmdme 1.5.1
+----------------------------------------------------------------
+DOCUMENTATION
+
+* Vignette was updated to use a modification of Journal of 
+Statistical Software's article.
+* CITATION file was included.
+* Minor updates to lmdme and decomposition man pages and Roxygen2
+ quotes, in order to include the article citation. 
+
+DEPENDENCY CHANGES
+
+* methods and limma packages were moved to import.
+* NAMESPACE file updated accordingly.
+
+lmdme 1.5.0
+----------------------------------------------------------------
+MINOR CHANGES
+
+* Bump y in version x.y.z to odd number in devel
+
+lmdme 1.4.0
+----------------------------------------------------------------
+MINOR CHANGES
+
+* bump y of x.y.z version number for BioC 2.13 release
+
 lmdme 1.3.1
 ----------------------------------------------------------------
 BUGS FIXED

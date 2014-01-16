@@ -71,6 +71,10 @@
 #'  (2011) ANOVA Principal component analysis and ANOVA-simultaneous
 #'  component analysis: a comparison J. Chemometrics 25:561-567
 #'  DOI:10.1002/cem.1400
+#'  \item Cristobal Fresno, Monica G. Balzarini, Elmer A. Fernandez (2014)
+#'  lmdme: Linear Models on Designed Multivariate Experiments in R,
+#'  Journal of Statistical Software, 56(7), 1-16.
+#'  http://www.jstatsoft.org/v56/i07/.
 #' }
 #'
 #' @examples

@@ -30,3 +30,8 @@ importFrom(stats,fitted)
 importFrom(stats,fitted.values)
 importFrom(stats,resid)
 importFrom(stats,residuals)
+import(methods, stemHypoxia)
+importFrom(limma, lmFit)
+importFrom(limma, eBayes)
+importFrom(limma, classifyTestsF)
+

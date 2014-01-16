@@ -54,6 +54,10 @@
 #'  Bioinformatics and Computational Biology Solutions using R and
 #'  Bioconductor. R. Gentleman, V. Carey, S. Dudoit, R. Irizarry, W.  Huber
 #'  (eds), Springer, New York, pages 397--420.
+#'  \item Cristobal Fresno, Monica G. Balzarini, Elmer A. Fernandez (2014)
+#'  lmdme: Linear Models on Designed Multivariate Experiments in R,
+#'  Journal of Statistical Software, 56(7), 1-16.
+#'  http://www.jstatsoft.org/v56/i07/.
 #' }
 #'
 #' @examples
