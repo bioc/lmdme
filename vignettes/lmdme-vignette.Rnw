@@ -3,6 +3,12 @@
 \usepackage{afterpage}
 \usepackage{subfigure}
 \usepackage[figuresright]{rotating} 
+% \VignetteIndexEntry{lmdme: linear model framework for PCA/PLS analysis of ANOVA decomposition on Designed Multivariate Experiments in R }
+% \VignetteDepends{stemHypoxia, limma, pls}
+% \VignetteKeyword{ANOVA decomposition}
+% \VignetteKeyword{linear model}
+% \VignetteKeyword{PCA}
+% \VignetteKeyword{PLS}
 
 \author{Crist\'{o}bal Fresno\\Universidad Cat\'{o}lica de C\'{o}rdoba \And 
         M\'{o}nica G Balzarini\\Universidad Nacional de C\'{o}rdoba \AND 

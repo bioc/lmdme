@@ -1,132 +1,155 @@
-lmdme 1.5.1
+Changes in version lmdme 1.5.2
 ----------------------------------------------------------------
+
 DOCUMENTATION
 
-* Vignette was updated to use a modification of Journal of 
-Statistical Software's article.
-* CITATION file was included.
-* Minor updates to lmdme and decomposition man pages and Roxygen2
- quotes, in order to include the article citation. 
+    * VignetteIndexEntry, VignetteDepends and \VignetteKeyword
+    added.
+
+Changes in version lmdme 1.5.1
+----------------------------------------------------------------
+
+DOCUMENTATION
+
+    * Vignette was updated to use a modification of Journal of 
+    Statistical Software's article.
+    * CITATION file was included.
+    * Minor updates to lmdme and decomposition man pages and Roxygen2
+     quotes, in order to include the article citation. 
 
 DEPENDENCY CHANGES
 
-* methods and limma packages were moved to import.
-* NAMESPACE file updated accordingly.
+    * methods and limma packages were moved to import.
+    * NAMESPACE file updated accordingly.
 
-lmdme 1.5.0
+Changes in version lmdme 1.5.0
 ----------------------------------------------------------------
+
 MINOR CHANGES
 
-* Bump y in version x.y.z to odd number in devel
+    * Bump y in version x.y.z to odd number in devel
 
-lmdme 1.4.0
+Changes in version lmdme 1.4.0
 ----------------------------------------------------------------
+
 MINOR CHANGES
 
-* bump y of x.y.z version number for BioC 2.13 release
+    * bump y of x.y.z version number for BioC 2.13 release
 
-lmdme 1.3.1
+Changes in version lmdme 1.3.1
 ----------------------------------------------------------------
+
 BUGS FIXED
 
-* NA manipulation of lmFit for coefficient is now contemplated
+    * NA manipulation of lmFit for coefficient is now contemplated
 
-lmdme 1.3.0
+Changes in version lmdme 1.3.0
 ----------------------------------------------------------------
+
 MINOR CHANGES
 
-* Bump y in version x.y.z to odd number in devel
+    * Bump y in version x.y.z to odd number in devel
 
-lmdme 1.2.0
+Changes in version lmdme 1.2.0
 ----------------------------------------------------------------
+
 MINOR CHANGES
 
-* bump y of x.y.z version number for BioC 2.12 release
+    * bump y of x.y.z version number for BioC 2.12 release
 
-lmdme 1.1.5
+Changes in version lmdme 1.1.5
 ----------------------------------------------------------------
+
 DOCUMENTATION
 
-* Vignette was updated to cope with Journal of Statistical Software article.
-* Minor updates to the man pages.
+    * Vignette was updated to cope with Journal of Statistical 
+    Software article.
+    * Minor updates to the man pages.
 
-lmdme 1.1.4
+Changes in version lmdme 1.1.4
 ----------------------------------------------------------------
+
 MINOR CHANGES
 
-* Enhance `biplot` function now accepts single character for `xlabs` and
-`ylabs`. In addition `which` parameter was also included for
-`plsr`decomposition (Thanks to Editor and two reviewers of Journal of
-Statistical Software).
+    * Enhance `biplot` function now accepts single character for 
+    `xlabs` and `ylabs`. In addition `which` parameter was also 
+    included for `plsr`decomposition (Thanks to Editor and two 
+    reviewers of Journal of Statistical Software).
 
-lmdme 1.1.3
+Changes in version lmdme 1.1.3
 ----------------------------------------------------------------
+
 MAYOR CHANGES
 
-* `lmDME` on class/files/.Rd names changed to `lmdme` in order to match package
-name (Thanks to Editor and two reviewers of Journal of Statistical Software).
+    * `lmDME` on class/files/.Rd names changed to `lmdme` in order 
+    to match package name (Thanks to Editor and two reviewers of 
+    Journal of Statistical Software).
 
-lmdme 1.1.2
+Changes in version lmdme 1.1.2
 ----------------------------------------------------------------
+
 MINOR CHANGES
 
-* Getters functions for lmDME class now have drop=TRUE parameter, in order to
-avoid using [[1]] when only one term/component is returned (Thanks to Elmer
-Fernandez).
+    * Getters functions for lmDME class now have drop=TRUE parameter,
+     in order to avoid using [[1]] when only one term/component is 
+    returned (Thanks to Elmer Fernandez).
 
 DOCUMENTATION
 
-* Missing usage functions helps for F.p.values, p.values, etc. were added.
+    * Missing usage functions helps for F.p.values, p.values, etc. 
+    were added.
 
-lmdme 1.1.1
-----------------------------------------------------------------
-MINOR CHANGES
-
-* R code, documentation, examples, etc.  were modify to cope with Journal of
-Statistical Software style rules: i) 2 character spaces for indentation. 
-ii) lines with at most 80 characters. iii) avoid typo errors.
-
-* URL field in Description file was updated.
-
-DEPENDENCY CHANGES
-
-* stemHypoxia data package was moved back to Depends in order to avoid
-  if(required){ #on example code } (Thanks to Editor of Journal of Statistical
-  Software).
-
-lmdme 1.0.0
-----------------------------------------------------------------
-
-DEPENDENCY CHANGES
-
-* stemHypoxia data package was moved to Suggests and in examples included the
-  appropriate if(required){ #example code } (Thanks to Valerie Obenchain).
-
-lmdme 0.99.1
+Changes in version lmdme 1.1.1
 ----------------------------------------------------------------
 
 MINOR CHANGES
 
-* Getters now accept a character vector in `term` parameter, in order to 
-specify one than one term if required. In addition, `design` and `model` were
-added, and `pvalues` like `Fvalues` were changed to match slot names.  (Thanks
-to Valerie Obenchain)
+    * R code, documentation, examples, etc.  were modify to cope 
+    with Journal of Statistical Software style rules: i) 2 
+    character spaces for indentation. ii) lines with at most 
+    80 characters. iii) avoid typo errors.
+    * URL field in Description file was updated.
 
-* `lmdme` now works with NA presence in data matrix. This bug is related to 
- lmFit intercept coefficient behavior, which breaks the data structure using 
- drop (to numeric instead of keeping a matrix with one column) only if NA are
- present.
+DEPENDENCY CHANGES
 
-* `lmdme` is now the only constructor. Method `initialize` was erased due to
- different reasons as described in
- https://stat.ethz.ch/pipermail/bioc­devel/2012­August/003554.html
+    * stemHypoxia data package was moved back to Depends in order 
+    to avoid if(required){ #on example code } (Thanks to Editor of 
+    Journal of Statistical Software).
 
-* `decomposition` example sections using `subset` parameter for simplicity (not
- all the data has to be decomposed in the example).
+Changes in version lmdme 1.0.0
+----------------------------------------------------------------
 
-* Enhance of `biplot` and `screeplot` functions with `term` and `mfcol` to
- simplify the graphic output specification.
+DEPENDENCY CHANGES
+
+    * stemHypoxia data package was moved to Suggests and in examples 
+    included the appropriate if(required){ #example code } (Thanks 
+    to Valerie Obenchain).
+
+Changes in version lmdme 0.99.1
+----------------------------------------------------------------
+
+MINOR CHANGES
+
+    * Getters now accept a character vector in `term` parameter, in 
+    order to specify one than one term if required. In addition, 
+    `design` and `model` were added, and `pvalues` like `Fvalues` 
+    were changed to match slot names.  (Thanks to Valerie Obenchain)
+
+    * `lmdme` now works with NA presence in data matrix. This bug 
+    is related to lmFit intercept coefficient behavior, which breaks 
+    the data structure using drop (to numeric instead of keeping a 
+    matrix with one column) only if NA are present.
+
+    * `lmdme` is now the only constructor. Method `initialize` was 
+    erased due to different reasons as described in
+    https://stat.ethz.ch/pipermail/bioc­devel/2012­August/003554.html
+
+    * `decomposition` example sections using `subset` parameter for 
+    simplicity (not all the data has to be decomposed in the example).
+
+    * Enhance of `biplot` and `screeplot` functions with `term` and 
+    `mfcol` to simplify the graphic output specification.
 
 DOCUMENTATION
 
-* `NEWS` file was added.
+    * `NEWS` file was added.
