@@ -1,7 +1,7 @@
 Package: lmdme
 Type: Package
 Title: Linear Model decomposition for Designed Multivariate Experiments
-Version: 1.38.0
+Version: 1.39.0
 Date: 2014-01-31
 Author: Cristobal Fresno and Elmer A. Fernandez
 Maintainer: Cristobal Fresno <cfresno@bdmg.com.ar>
